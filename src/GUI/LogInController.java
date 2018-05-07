@@ -1,5 +1,7 @@
 package GUI;
 
+import static GUI.WindowCreator.WindowCreator;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -22,36 +24,33 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.cell.TextFieldTreeCell;
-import static GUI.WindowCreator.WindowCreator;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 /**
- * Constructor de la clase de la Ventana principal
+ * Constructor de la clase de la Ventana Log In para inicio de secion
  *
  * @author deiber
  */
-public class GUIController implements Initializable {
+public class LogInController implements Initializable {
 
-    private Main PrincipalProgram;
-    public void setPrincipalProgram(Main PrincipalProgram) {
-        this.PrincipalProgram = PrincipalProgram;
+	private Stage PrincipalStage;
+    public void setPrincipalStage(Stage stagePrincipal) {
+        this.PrincipalStage = stagePrincipal;
     }
-   
-    public static Button LogInButton;
+    
+    public static Button SignUpButton;
     @FXML
-    private Button BtLogIn;
+    private Button BtSignUp;
     
-    
-    @FXML       /// Accion del boton Log In///
-    private void LogIn(ActionEvent event) {
-    	WindowCreator("LogInWindow");
+    @FXML       /// Accion del boton Sign Up///
+    private void SignUp(ActionEvent event) {
+    	WindowCreator("SignUpWindow");
+    	//SignUpButton.setDisable(false); //// Desactiva el boton ///
     }
     
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		LogInButton = BtLogIn;
+		SignUpButton = BtSignUp;
 	}
-
 }

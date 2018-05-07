@@ -1,18 +1,15 @@
 package GUI;
-
+	
 import java.io.IOException;
+
+import static GUI.WindowCreator.WindowCreator;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 
-/**
- * Main.java
- * 
- * @author deiber
- */
 public class Main extends Application {
 
     public static Stage PrincipalStage;
@@ -23,11 +20,11 @@ public class Main extends Application {
      *
      * @param NombreDeVentana
      */
-    public void WindowCreator(String WindowName) {
+    public void PrincipalWindowCreator(String WindowName) {
 
         if ("GUI".equals(WindowName)) {
             try {
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("GUI.fxml"));
+            	FXMLLoader loader = new FXMLLoader(Main.class.getResource("GUI.fxml"));
                 rootPane = (AnchorPane) loader.load();
                 Scene scene = new Scene(rootPane);
                 PrincipalStage.setResizable(false);
@@ -47,16 +44,23 @@ public class Main extends Application {
     /**
      * Llamado a la ventana principal
      *
-     * @param PrincipalStage
+     * @param stagePrincipal
      * @throws Exception
      */
     @Override
     public void start(Stage PrincipalStage) throws Exception {
         this.PrincipalStage = PrincipalStage;
-        WindowCreator("GUI");
+        PrincipalWindowCreator("GUI");
+        WindowCreator("LogInWindow");
     }
 
+    /**
+     * Llamado a la ventana principal
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
 }
+

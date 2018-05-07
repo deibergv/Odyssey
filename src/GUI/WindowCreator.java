@@ -1,6 +1,6 @@
 package GUI;
 
-import static GUI.Main.PrincipalStage;
+import static GUI.Main.*;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,9 +21,8 @@ public class WindowCreator {
      * @param WindowName
      */
     public static void WindowCreator(String WindowName) {
-        String Window = WindowName;
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Window + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(WindowName + ".fxml"));
             AnchorPane SecondWindow = (AnchorPane) loader.load();
             Stage window = new Stage();
             window.setResizable(false);
@@ -33,13 +32,18 @@ public class WindowCreator {
             window.setScene(scene);
             if (null != WindowName) {
                 switch (WindowName) {
-                    case "LoginWindow": {
-                        window.setTitle("Login/Registro");
-                        LoginController controller = loader.getController();
-                        controller.setStagePrincipal(window);
+                    case "LogInWindow": {
+                        window.setTitle("Log In");
+                        LogInController controller = loader.getController();
+                        controller.setPrincipalStage(window);
                         break;
                     }
-                    
+                    case "SignUpWindow": {
+                        window.setTitle("¡WELCOME TO ODYSSEY!");
+                        SignUpController controller = loader.getController();
+                        controller.setPrincipalStage(window);
+                        break;
+                    }
                     // falta otra para ordenar canciones
                     // tal vez otra para busqueda de canciones
                     
@@ -53,5 +57,9 @@ public class WindowCreator {
             System.out.println(ex.toString());
             System.out.println("Error en Ventana");
         }
+    }
+    
+    public static void WindowDestructor(String WindowName) {
+    	
     }
 }
