@@ -46,16 +46,15 @@ public class WindowCreator {
 				FXMLLoader loader = new FXMLLoader(Main.class.getResource(WindowName + ".fxml"));
 				AnchorPane SecondPane = (AnchorPane) loader.load();
 				Stage SecondStage = new Stage();
-				Scene scene = new Scene(SecondPane);///////////////////////////////////////
+				Scene scene = new Scene(SecondPane);
 				SecondStage.setScene(scene);
-				LogInController controller = loader.getController(); // intentar seguir con cierre de ventana desde
+				LogInController controller = loader.getController();
 				controller.setSecondStage(SecondStage);
 				SecondStage.setResizable(false);
 				SecondStage.initModality(Modality.WINDOW_MODAL);
 				SecondStage.initOwner(PrincipalStage);
-				// SecondWindow.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de
-				// arriba
-				SecondStage.setTitle("¡WELCOME TO ODYSSEY!");
+				SecondStage.initStyle(StageStyle.UNDECORATED);	// quita barra de opciones de arriba
+//				SecondStage.setTitle("¡WELCOME TO ODYSSEY! - Please Log In :)");
 				SecondStage.show();
 				
 			} else if ("SignUpWindow".equals(WindowName)) {
@@ -65,14 +64,13 @@ public class WindowCreator {
 				Stage SecondStage = new Stage();
 				Scene scene = new Scene(SecondPane);///////////////////////////////////////
 				SecondStage.setScene(scene);
-				SignUpController controller = loader.getController(); // intentar seguir con cierre de ventana desde
+				SignUpController controller = loader.getController();
 				controller.setSecondStage(SecondStage);
 				SecondStage.setResizable(false);
 				SecondStage.initModality(Modality.WINDOW_MODAL);
 				SecondStage.initOwner(PrincipalStage);
-				// SecondWindow.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de
-				// arriba
-				SecondStage.setTitle("¡WELCOME TO ODYSSEY!");
+				SecondStage.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de arriba
+//				SecondStage.setTitle("¡WELCOME TO ODYSSEY! - - Please Sign Up :)");
 				SecondStage.show();
 			}
 		} catch (IOException ex) {

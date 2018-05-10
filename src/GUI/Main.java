@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 
-    public static Stage PrincipalStage;
+    public static Stage PrincipalStage = null;
 //    public static Stage SecondStage;
 //    public static AnchorPane rootPane;
 

@@ -43,10 +43,13 @@ public class GUIController implements Initializable {
     @FXML
     private Button BtLogIn;
     
-//    @FXML       /// Cerrar ventana ///
-//    private void handleClose(ActionEvent event) {
-//    	System.exit(0);
-//    }
+    
+    @FXML
+    private Button kk;
+    @FXML       /// Cerrar ventana ///
+    private void handleClose(ActionEvent event) {
+    	System.exit(0);
+    }
     
     @FXML       /// Accion del boton Log In///
     private void LogIn(ActionEvent event) {

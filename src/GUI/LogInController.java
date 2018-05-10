@@ -36,42 +36,35 @@ import javafx.stage.Stage;
 public class LogInController implements Initializable {
 
 	private Stage SecondStage;
-    public void setSecondStage(Stage newSecondStage) {
-        this.SecondStage = newSecondStage;
-    }
-    
-    public static Button SignUpButton;
-    @FXML
-    private Button BtSignUp;
-    @FXML       /// Accion del boton Sign Up ///
-    private void SignUp(ActionEvent event) {
-    	WindowCreator("SignUpWindow");
-//    	SignUpButton.setDisable(true);
-    }
-    
-    public static Button LogInButton;
-    @FXML
-    private Button BtLogIn;
-    @FXML       /// Accion del boton Sign Up ///
-    private void LogIn(ActionEvent event) {
-//    	WindowCreator("GUI");
-//    	LogInButton.setDisable(true);
-//    	SignUpButton.setDisable(true);
-    }
-    
-    @FXML       /// Cerrar ventana ///
-    private void handleClose(ActionEvent event) {
-//    	WindowCreator("SignUpWindow");
-//    	SecondStage.close();
-//    	PrincipalStage.close();
-//    	SecondStage.setTitle("asd");
-    	System.exit(0);
-//    	WindowCreator("GUI");
-//    	WindowDestructor("LogInWindow");
-    }
-    
-    
-    
+
+	public void setSecondStage(Stage newSecondStage) {
+		this.SecondStage = newSecondStage;
+	}
+
+	@FXML /// Cerrar ventana ///
+	private void handleClose(ActionEvent event) {
+		SecondStage.close();
+	}
+	
+	public static Button SignUpButton;
+	@FXML
+	private Button BtSignUp;
+
+	@FXML /// Accion del boton Sign Up, cambio de ventana ///
+	private void SignUp(ActionEvent event) {
+		SecondStage.close();
+		WindowCreator("SignUpWindow");
+	}
+
+	public static Button LogInButton;
+	@FXML
+	private Button BtLogIn;
+
+	@FXML /// Accion del boton Log In ///
+	private void LogIn(ActionEvent event) {
+//		SecondStage.close(); // if inicia sesion de forma correcta, cierra ventana y sigue
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		SignUpButton = BtSignUp;
