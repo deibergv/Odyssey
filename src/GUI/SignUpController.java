@@ -33,10 +33,9 @@ import javafx.stage.Stage;
  */
 public class SignUpController implements Initializable {
 
-	private Stage PrincipalStage;
-
-    public void setPrincipalStage(Stage stagePrincipal) {
-        this.PrincipalStage = stagePrincipal;
+	private Stage SecondStage;
+    public void setSecondStage(Stage NewSecondStage) {
+        this.SecondStage = NewSecondStage;
     }
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

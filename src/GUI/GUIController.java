@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeCell;
@@ -33,15 +34,19 @@ import javafx.stage.Stage;
  */
 public class GUIController implements Initializable {
 
-    private Main PrincipalProgram;
-    public void setPrincipalProgram(Main PrincipalProgram) {
-        this.PrincipalProgram = PrincipalProgram;
+    private Scene PrincipalProgram;
+    public void setPrincipalProgram(Scene scene) {
+        this.PrincipalProgram = scene;
     }
-   
+	
     public static Button LogInButton;
     @FXML
     private Button BtLogIn;
     
+//    @FXML       /// Cerrar ventana ///
+//    private void handleClose(ActionEvent event) {
+//    	System.exit(0);
+//    }
     
     @FXML       /// Accion del boton Log In///
     private void LogIn(ActionEvent event) {
