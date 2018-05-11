@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="parent" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="693.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TestController">
+   <children>
+      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets right="5.0" />
+         </HBox.margin>
+         <children>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="300.0" styleClass="orange" />
+            <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="141.0">
+               <children>
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0" text="Suffle Mode" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXToggleButton contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" text=" " toggleColor="#ff9602" toggleLineColor="#b1700e" unToggleColor="WHITE" unToggleLineColor="#b5b5b5">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></JFXToggleButton>
+               </children>
+            </HBox>
+            <Line endX="100.0" layoutX="150.0" layoutY="202.0" startX="-100.0" stroke="#e89511" />
+         </children>
+      </Pane>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="380.0" styleClass="player" HBox.hgrow="NEVER">
+         <children>
+            <Pane prefHeight="73.0" prefWidth="380.0" styleClass="linear-grad-to-top">
+               <children>
+                  <FontAwesomeIconView glyphName="BARS" layoutX="6.0" layoutY="21.0" onMouseClicked="#Open_or_Close_SideBar" size="1.5em" styleClass="menu-btn" />
+                  <FontAwesomeIconView glyphName="CLOSE" layoutX="359.0" layoutY="20.0" onMouseClicked="#Close_app" size="1.5em" styleClass="close-btn" />
+               </children>
+            </Pane>
+            <Pane layoutY="507.0" prefHeight="73.0" prefWidth="380.0" styleClass="linear-grad-to-bottom">
+               <children>
+                  <MaterialDesignIconView fill="WHITE" glyphName="PLAY" layoutX="165.0" layoutY="55.0" size="50" styleClass="player-btns" text="" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_RIGHT" layoutX="230.0" layoutY="55.0" size="50" styleClass="player-btns" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_LEFT" layoutX="100.0" layoutY="55.0" size="50" styleClass="player-btns" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="RETWEET" layoutX="21.0" layoutY="42.0" size="20" styleClass="player-btns" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="RANDOM" layoutX="65.0" layoutY="43.0" size="20" styleClass="player-btns" />
+                  <JFXSlider layoutX="277.0" layoutY="29.0" prefHeight="15.0" prefWidth="89.0" styleClass="jfx-progress-bar" value="100.0" />
+               </children></Pane>
+            <MaterialDesignIconView fill="WHITE" glyphName="TERRAIN" layoutX="115.0" layoutY="314.0" size="150" />
+            <JFXProgressBar layoutX="12.0" layoutY="502.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="356.0" progress="0.0" styleClass="jfx-progress-bar" />
+            <Label alignment="CENTER" layoutX="91.0" layoutY="469.0" text="Playing: Awakening - Swichtfoot" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</HBox>
