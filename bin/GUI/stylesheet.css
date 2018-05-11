@@ -31,8 +31,9 @@
     -fx-fill:#E89511;
     -fx-cursor:hand;
 }
+
 .jfx-progress-bar{
-    -fx-accent :#E89511;
+    -fx-accent:#E89511;
 }
 
 .linear-grad-to-top{

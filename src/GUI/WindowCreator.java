@@ -1,10 +1,15 @@
+/**
+ * @author deiber
+ */
 package GUI;
 
-import static GUI.Main.*;
+import static GUI.Launch.*;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -16,11 +21,6 @@ import javafx.stage.StageStyle;
  */
 public class WindowCreator {
 
-	// public static Stage PrincipalStage = new Stage();
-	public static AnchorPane rootPane;
-	// public static AnchorPane SecondPane;
-	// public static Stage SecondStage = new Stage();
-
 	/**
 	 * Filtro de creacion
 	 *
@@ -30,20 +30,17 @@ public class WindowCreator {
 		try {
 			if ("GUI".equals(WindowName)) {
 				
-				FXMLLoader loader = new FXMLLoader(Main.class.getResource(WindowName + ".fxml"));
-				rootPane = (AnchorPane) loader.load();
+				Parent rootPane = FXMLLoader.load(Launch.class.getResource(WindowName + ".fxml"));
 				Scene scene = new Scene(rootPane);
+				scene.setFill(Color.TRANSPARENT);
+				PrincipalStage.initStyle(StageStyle.TRANSPARENT);
 				PrincipalStage.setScene(scene);
-				PrincipalStage.setResizable(false);
-				// stagePrincipal.initModality(Modality.WINDOW_MODAL);
 				PrincipalStage.setTitle("Odyssey");
-				GUIController controller = loader.getController();
-				controller.setPrincipalProgram(scene);
 				PrincipalStage.show();
-				
+
 			} else if ("LogInWindow".equals(WindowName)) {
-				
-				FXMLLoader loader = new FXMLLoader(Main.class.getResource(WindowName + ".fxml"));
+
+				FXMLLoader loader = new FXMLLoader(Launch.class.getResource(WindowName + ".fxml"));
 				AnchorPane SecondPane = (AnchorPane) loader.load();
 				Stage SecondStage = new Stage();
 				Scene scene = new Scene(SecondPane);
@@ -53,13 +50,12 @@ public class WindowCreator {
 				SecondStage.setResizable(false);
 				SecondStage.initModality(Modality.WINDOW_MODAL);
 				SecondStage.initOwner(PrincipalStage);
-				SecondStage.initStyle(StageStyle.UNDECORATED);	// quita barra de opciones de arriba
-//				SecondStage.setTitle("¡WELCOME TO ODYSSEY! - Please Log In :)");
+				SecondStage.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de arriba
 				SecondStage.show();
-				
+
 			} else if ("SignUpWindow".equals(WindowName)) {
-				
-				FXMLLoader loader = new FXMLLoader(Main.class.getResource(WindowName + ".fxml"));
+
+				FXMLLoader loader = new FXMLLoader(Launch.class.getResource(WindowName + ".fxml"));
 				AnchorPane SecondPane = (AnchorPane) loader.load();
 				Stage SecondStage = new Stage();
 				Scene scene = new Scene(SecondPane);///////////////////////////////////////
@@ -70,59 +66,11 @@ public class WindowCreator {
 				SecondStage.initModality(Modality.WINDOW_MODAL);
 				SecondStage.initOwner(PrincipalStage);
 				SecondStage.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de arriba
-//				SecondStage.setTitle("¡WELCOME TO ODYSSEY! - - Please Sign Up :)");
 				SecondStage.show();
 			}
 		} catch (IOException ex) {
 			System.out.println(ex.toString());
 			System.out.println("Error con la Ventana");
-		}
-
-		// try {
-		// FXMLLoader loader = new FXMLLoader(Main.class.getResource(WindowName +
-		// ".fxml"));
-		// AnchorPane SecondWindow = (AnchorPane) loader.load();
-		// Stage window = new Stage();
-		// window.setResizable(false);
-		// window.initModality(Modality.WINDOW_MODAL);
-		// window.initOwner(PrincipalStage);
-		// Scene scene = new Scene(SecondWindow);
-		// window.setScene(scene);
-		// if (null != WindowName) {
-		// switch (WindowName) {
-		// case "LogInWindow": {
-		// // window.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de
-		// // arriba
-		// window.setTitle("¡WELCOME TO ODYSSEY!");
-		// LogInController controller = loader.getController(); // intentar seguir con
-		// cierre de ventana desde
-		// // "X"
-		// controller.setSecondStage(window);
-		// break;
-		// }
-		// case "SignUpWindow": {
-		// window.setTitle("¡WELCOME TO ODYSSEY!");
-		// SignUpController controller = loader.getController();
-		// controller.setPrincipalStage(window);
-		// break;
-		// }
-		// // falta otra para ordenar canciones
-		// // tal vez otra para busqueda de canciones
-		//
-		// default:
-		// break;
-		// }
-		// }
-		// window.show();
-		// } catch (IOException ex) {
-		// System.out.println(ex.toString());
-		// System.out.println("Error en Ventana");
-		// }
-	}
-
-	public static void WindowDestructor(String WindowName) {
-		if ("LogInWindow".equals(WindowName)) {
-			// SecondStage.close();
 		}
 	}
 }
