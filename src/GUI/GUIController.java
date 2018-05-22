@@ -4,21 +4,30 @@
 
 package GUI;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import streamplayer.StreamPlayer;
+import visualizer.Visualizer;
 
 /**
  * @author deiber Controlador de la ventana Principal
  */
 public class GUIController implements Initializable {
 
+	Player player = null;
+	Visualizer visualizer = null;
+	StreamPlayer streamPlayer = null;
+	
 	private double xOffset = 0;
 	private double yOffset = 0;
 	private static final int DEFAULT_STARTING_X_POSITION = 0;
@@ -29,12 +38,22 @@ public class GUIController implements Initializable {
 	private HBox parent;
 	@FXML
 	private Pane Sidebar;
-
+	@FXML
+	private StackPane WavesView;
+	@FXML
+	MaterialDesignIconView PauseAndResumeBt;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		makeStageDrageable();
 		Sidebar.setVisible(false);
 		animationGenerator = new AnimationGenerator();
+		
+		visualizer = new Visualizer("WavesVisualizer");
+		WavesView.getChildren().add(visualizer);
+		streamPlayer = new StreamPlayer();
+		player = new Player(visualizer, streamPlayer);
+		
 	}
 
 	/**
@@ -92,4 +111,42 @@ public class GUIController implements Initializable {
 	private void Close_app(MouseEvent event) {
 		System.exit(0);
 	}
+	
+	
+	
+	boolean IsPlaying = false;
+	@FXML
+	private void PauseAndResumeSong(MouseEvent event) {
+		if (IsPlaying == true) {
+			player.pauseSong();
+			PauseAndResumeBt.setGlyphName("PLAY");
+			IsPlaying = false;
+		} else if (IsPlaying == false) {
+			player.resumeSong();
+			PauseAndResumeBt.setGlyphName("PAUSE");			
+			IsPlaying = true;
+		}
+	}
+
+	boolean song = true;		//regulacion de cancion
+	@FXML
+	private void Skip(MouseEvent event) {
+//		if (song == true) {
+			player.stopSong();
+			player.playSong(new File("/home/deiber/Desktop/Switchfoot - Awakening.mp3"));
+		
+			PauseAndResumeBt.setGlyphName("PAUSE");			
+			IsPlaying = true;
+//			song = false;
+//
+//		} else if (song == false) {
+//			player.stopSong();
+//			player.playSong(new File("/home/deiber/Desktop/Reckless Love.mp3"));
+//			song = true;
+//		}
+	}
+	
+	
+	
+	
 }

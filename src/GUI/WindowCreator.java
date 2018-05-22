@@ -37,7 +37,7 @@ public class WindowCreator {
 				PrincipalStage.setScene(scene);
 				PrincipalStage.setTitle("Odyssey");
 				PrincipalStage.show();
-
+				
 			} else if ("LogInWindow".equals(WindowName)) {
 
 				FXMLLoader loader = new FXMLLoader(Launch.class.getResource(WindowName + ".fxml"));
