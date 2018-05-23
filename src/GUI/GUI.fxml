@@ -48,14 +48,14 @@
             <Pane layoutY="507.0" prefHeight="73.0" prefWidth="380.0" styleClass="linear-grad-to-bottom">
                <children>
                   <MaterialDesignIconView fx:id="PauseAndResumeBt" fill="WHITE" glyphName="PLAY" layoutX="165.0" layoutY="55.0" onMouseClicked="#PauseAndResumeSong" size="50" styleClass="player-btns" text="" />
-                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_RIGHT" layoutX="230.0" layoutY="55.0" onMouseClicked="#Skip" size="50" styleClass="player-btns" />
-                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_LEFT" layoutX="100.0" layoutY="55.0" size="50" styleClass="player-btns" />
-                  <FontAwesomeIconView fill="WHITE" glyphName="RETWEET" layoutX="14.0" layoutY="43.0" size="20" styleClass="player-btns" />
-                  <FontAwesomeIconView fill="WHITE" glyphName="RANDOM" layoutX="60.0" layoutY="43.0" size="20" styleClass="player-btns" />
-                  <JFXSlider layoutX="277.0" layoutY="21.0" prefHeight="28.0" prefWidth="89.0" value="100.0" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_RIGHT" layoutX="230.0" layoutY="55.0" onMouseClicked="#Next" size="50" styleClass="player-btns" />
+                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_LEFT" layoutX="100.0" layoutY="55.0" onMouseClicked="#Previous" size="50" styleClass="player-btns" />
+                  <FontAwesomeIconView fx:id="RepeatBt" fill="WHITE" glyphName="RETWEET" layoutX="14.0" layoutY="43.0" onMouseClicked="#Repeat" size="20" styleClass="player-btns" />
+                  <FontAwesomeIconView fx:id="SuffleBt" fill="WHITE" glyphName="RANDOM" layoutX="60.0" layoutY="43.0" onMouseClicked="#Shuffle" size="20" styleClass="player-btns" text="" />
+                  <JFXSlider fx:id="VolumeBar" layoutX="277.0" layoutY="21.0" prefHeight="28.0" prefWidth="89.0" value="100.0" />
                </children></Pane>
-            <JFXProgressBar layoutX="12.0" layoutY="491.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="356.0" progress="0.51" styleClass="jfx-progress-bar" />
-            <Label alignment="CENTER" layoutX="91.0" layoutY="458.0" text="Playing: Awakening - Swichtfoot" textAlignment="CENTER" textFill="WHITE">
+            <JFXProgressBar fx:id="TimePlaying" layoutX="12.0" layoutY="491.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="356.0" progress="0.51" styleClass="jfx-progress-bar" />
+            <Label fx:id="NameSong" alignment="CENTER" layoutX="91.0" layoutY="458.0" text="Playing: Awakening - Swichtfoot" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
