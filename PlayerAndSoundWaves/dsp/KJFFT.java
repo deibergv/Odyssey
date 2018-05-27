@@ -1,13 +1,10 @@
-/*
- * 
- */
 package dsp;
 
 
 /**
  * The Class KJFFT.
  * 
- * @author Kris Fudalewski
+ * @author deiber
  */
 public class KJFFT {
 

@@ -29,16 +29,16 @@ import java.io.PrintWriter;
 /**
  * Special exceptions of StreamPlayer.
  *
- * @author GOXR3PLUS (www.goxr3plus.co.nf)
- * @author http://www.javazoom.net
- */
+ * @author deiber
+ *  
+*/
 @SuppressWarnings("serial")
 public class StreamPlayerException extends Exception {
 
     /**
      * Type of exception.
      *
-     * @author GOXR3PLUS
+     * @author deiber
      */
     public enum PlayerException {
 

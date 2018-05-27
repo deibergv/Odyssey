@@ -26,7 +26,7 @@ package streamplayer;
 /**
  * The Class StreamPlayerEvent.
  *
- * @author GOXR3PLUS (www.goxr3plus.co.nf)
+ * @author deiber
  */
 public class StreamPlayerEvent {
 

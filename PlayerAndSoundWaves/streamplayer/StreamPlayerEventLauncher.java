@@ -28,7 +28,7 @@ import java.util.concurrent.Callable;
 /**
  * The Class StreamPlayerEventLauncher.
  *
- * @author GOXR3PLUS (www.goxr3plus.co.nf)
+ * @author deiber
  */
 public class StreamPlayerEventLauncher implements Callable<String> {
 

@@ -3,8 +3,6 @@
  */
 package GUI;
 
-import static GUI.WindowCreator.WindowCreator;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,12 +14,13 @@ import javafx.stage.Stage;
 public class Launch extends Application {
 
 	public static Stage PrincipalStage = null;
+//	public static Stage SecondStage = null;
 
 	@Override
 	public void start(Stage PrincipalStage) throws Exception {
 		this.PrincipalStage = PrincipalStage;
-		WindowCreator("GUI");
-		// WindowCreator("LogInWindow");
+		WindowCreator.WindowCreator("GUI");
+		WindowCreator.WindowCreator("LogInWindow");
 	}
 
 	/**

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="451.0" prefWidth="787.0" style="-fx-background-color: #0e0e0e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SignUpController">
+<AnchorPane fx:id="parentSignUp" prefHeight="451.0" prefWidth="787.0" style="-fx-background-color: #0e0e0e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SignUpController">
    <children>
       <ImageView fitHeight="451.0" fitWidth="793.0" opacity="0.44">
          <image>
@@ -18,12 +18,12 @@
       </ImageView>
       <AnchorPane layoutX="28.0" layoutY="33.0" prefHeight="381.0" prefWidth="387.0" style="-fx-background-color: #b83110;">
          <children>
-            <JFXTextField focusColor="#626562" layoutX="29.0" layoutY="91.0" prefHeight="28.0" prefWidth="329.0" promptText="User \ e-mail" unFocusColor="#c3b7b7">
+            <JFXTextField fx:id="UserField" focusColor="#626562" layoutX="29.0" layoutY="91.0" prefHeight="28.0" prefWidth="329.0" promptText="User \ e-mail" unFocusColor="#c3b7b7">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField focusColor="#515151" layoutX="29.0" layoutY="157.0" prefHeight="34.0" prefWidth="329.0" promptText="Password" unFocusColor="#c3b7b7">
+            <JFXPasswordField fx:id="PassField" focusColor="#515151" layoutX="29.0" layoutY="157.0" prefHeight="34.0" prefWidth="329.0" promptText="Password" unFocusColor="#c3b7b7">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -55,7 +55,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXButton layoutX="760.0" layoutY="-2.0" onAction="#handleClose" prefWidth="27.0" text="x" textFill="#e1dbdb">
+      <JFXButton layoutX="760.0" layoutY="-2.0" onAction="#CloseWindow" prefWidth="27.0" text="x" textFill="#e1dbdb">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

@@ -29,7 +29,7 @@ import javafx.scene.paint.Color;
 /**
  * The Class Visualizer.
  *
- * @author GOXR3PLUS
+ * @author deiber
  */
 public class Visualizer extends VisualizerDrawer {
 
@@ -118,7 +118,7 @@ public class Visualizer extends VisualizerDrawer {
 	/**
 	 * This Service is updating the visualizer.
 	 *
-	 * @author GOXR3PLUS
+	 * @author deiber
 	 */
 	public class PaintService extends AnimationTimer {
 

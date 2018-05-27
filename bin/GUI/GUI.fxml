@@ -15,7 +15,7 @@
 
 <HBox fx:id="parent" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="693.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
    <children>
-      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
+      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets right="5.0" />
          </HBox.margin>
@@ -43,16 +43,17 @@
                <children>
                   <FontAwesomeIconView glyphName="BARS" layoutX="6.0" layoutY="21.0" onMouseClicked="#Open_or_Close_SideBar" size="1.5em" styleClass="menu-btn" />
                   <FontAwesomeIconView glyphName="CLOSE" layoutX="359.0" layoutY="20.0" onMouseClicked="#Close_app" size="1.5em" styleClass="close-btn" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" layoutX="28.0" layoutY="21.0" onMouseClicked="#Search" size="1.5em" styleClass="menu-btn" />
                </children>
             </Pane>
             <Pane layoutY="507.0" prefHeight="73.0" prefWidth="380.0" styleClass="linear-grad-to-bottom">
                <children>
-                  <MaterialDesignIconView fx:id="PauseAndResumeBt" fill="WHITE" glyphName="PLAY" layoutX="165.0" layoutY="55.0" onMouseClicked="#PauseAndResumeSong" size="50" styleClass="player-btns" text="" />
-                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_RIGHT" layoutX="230.0" layoutY="55.0" onMouseClicked="#Next" size="50" styleClass="player-btns" />
-                  <MaterialDesignIconView fill="WHITE" glyphName="CHEVRON_LEFT" layoutX="100.0" layoutY="55.0" onMouseClicked="#Previous" size="50" styleClass="player-btns" />
-                  <FontAwesomeIconView fx:id="RepeatBt" fill="WHITE" glyphName="RETWEET" layoutX="14.0" layoutY="43.0" onMouseClicked="#Repeat" size="20" styleClass="player-btns" />
-                  <FontAwesomeIconView fx:id="SuffleBt" fill="WHITE" glyphName="RANDOM" layoutX="60.0" layoutY="43.0" onMouseClicked="#Shuffle" size="20" styleClass="player-btns" text="" />
-                  <JFXSlider fx:id="VolumeBar" layoutX="277.0" layoutY="21.0" prefHeight="28.0" prefWidth="89.0" value="100.0" />
+                  <MaterialDesignIconView fx:id="PauseAndResumeBt" fill="WHITE" glyphName="PLAY" layoutX="165.0" layoutY="54.0" onMouseClicked="#PauseAndResumeSong" size="50" styleClass="player-btns" text="" />
+                  <FontAwesomeIconView fx:id="RepeatBt" fill="WHITE" glyphName="RETWEET" layoutX="25.0" layoutY="41.0" onMouseClicked="#Repeat" size="20" styleClass="Repeat-Aleatory-btns" />
+                  <FontAwesomeIconView fx:id="ShuffleBt" fill="WHITE" glyphName="RANDOM" layoutX="68.0" layoutY="42.0" onMouseClicked="#Shuffle" size="20" styleClass="Repeat-Aleatory-btns" />
+                  <JFXSlider fx:id="VolumeBar" layoutX="277.0" layoutY="21.0" onMouseDragged="#VolumeRegulation" prefHeight="28.0" prefWidth="89.0" styleClass="jfx-VolumeSlider-bar" value="100.0" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" layoutX="122.0" layoutY="46.0" onMouseClicked="#Previous" size="30" styleClass="player-btns" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="FORWARD" layoutX="230.0" layoutY="47.0" onMouseClicked="#Next" size="30" styleClass="player-btns" text="" />
                </children></Pane>
             <JFXProgressBar fx:id="TimePlaying" layoutX="12.0" layoutY="491.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="356.0" progress="0.51" styleClass="jfx-progress-bar" />
             <Label fx:id="NameSong" alignment="CENTER" layoutX="91.0" layoutY="458.0" text="Playing: Awakening - Swichtfoot" textAlignment="CENTER" textFill="WHITE">

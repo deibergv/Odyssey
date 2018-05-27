@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import streamplayer.StreamPlayer;
 import visualizer.Visualizer;
 
@@ -47,9 +48,9 @@ public class GUIController implements Initializable {
 	@FXML
 	MaterialDesignIconView PauseAndResumeBt;
 	@FXML
-	FontAwesomeIconView SuffleBt;
-	@FXML
 	FontAwesomeIconView RepeatBt;
+	@FXML
+	FontAwesomeIconView ShuffleBt;
 	@FXML
 	Slider VolumeBar;
 	@FXML
@@ -117,6 +118,16 @@ public class GUIController implements Initializable {
 	}
 
 	/**
+	 * Llamado a la ventana de busqueda
+	 * 
+	 * @param event
+	 */
+	@FXML
+	private void Search(MouseEvent event) {
+		WindowCreator.WindowCreator("SearchWindow");
+	}
+
+	/**
 	 * Cierre del programa
 	 * 
 	 * @param event
@@ -130,6 +141,7 @@ public class GUIController implements Initializable {
 
 	/**
 	 * Pausa o resumen de reproduccion
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -145,14 +157,15 @@ public class GUIController implements Initializable {
 		}
 	}
 
-	boolean Changesong = true; // regulacion de cancion		// Borrar luego
+	boolean Changesong = true; // regulacion de cancion // Borrar luego
 
 	/**
 	 * Salto a siguiente cancion
+	 * 
 	 * @param event
 	 */
 	@FXML
-	private void Next(MouseEvent event) {		/// hacerlo			/////////////////////////////////////
+	private void Next(MouseEvent event) { /// hacerlo /////////////////////////////////////
 		if (Changesong == true) {
 			player.stopSong();
 			player.playSong(new File("/home/deiber/Desktop/Switchfoot - Awakening.mp3"));
@@ -170,10 +183,11 @@ public class GUIController implements Initializable {
 
 	/**
 	 * Retroceso a cancion anterior
+	 * 
 	 * @param event
 	 */
 	@FXML
-	private void Previous(MouseEvent event) {		/// hacerlo			/////////////////////////////////////
+	private void Previous(MouseEvent event) { /// hacerlo /////////////////////////////////////
 		if (Changesong == true) {
 			player.stopSong();
 			player.playSong(new File("/home/deiber/Desktop/Switchfoot - Awakening.mp3"));
@@ -188,23 +202,29 @@ public class GUIController implements Initializable {
 			Changesong = true;
 		}
 	}
-	
-	boolean ShuffleState = false;	// Flag Shuffle Button State
+
+	boolean ShuffleState = false; // Flag Shuffle Button State
 
 	/**
 	 * Activacion/Desactivacion del modo aleatorio
+	 * 
 	 * @param event
 	 */
 	@FXML
-	private void Shuffle(MouseEvent event) {		/// hacerlo			/////////////////////////////////////
-		if (ShuffleState = false) {
+	private void Shuffle(MouseEvent event) { /// hacerlo /////////////////////////////////////
+
+		if (ShuffleState == false) {
+
+			// Activacion del modo aleatorio
 			ShuffleState = true;
-			// SuffleBt. // cambiar color a naranja luego de ser presionado
-			// hacer aleatoria la lista
-		} else if (ShuffleState = true) {
+			ShuffleBt.setFill(Color.ORANGE);
+
+		} else if (ShuffleState == true) {
+
+			// Desactivacion del modo aleatorio
 			ShuffleState = false;
-			// hacer que se desactive (cambio de color), y tratar de devolver orden a la
-			// lista
+			ShuffleBt.setFill(Color.WHITE);
+
 		}
 	}
 
@@ -212,41 +232,39 @@ public class GUIController implements Initializable {
 
 	/**
 	 * Activacion/Desactivacion del modo repeticion
+	 * 
 	 * @param event
 	 */
 	@FXML
-	private void Repeat(MouseEvent event) {		/// hacerlo			/////////////////////////////////////
-		if (RepeatState = false) {
+	private void Repeat(MouseEvent event) { /// hacerlo /////////////////////////////////////
+
+		if (RepeatState == false) {
+
+			// Activacion del modo repeticion
 			RepeatState = true;
-			// RepeatBt. // cambiar color a naranja luego de ser presionado
-			// hacer que se repita la cancion
-		} else if (RepeatState = true) {
+			RepeatBt.setFill(Color.ORANGE);
+
+		} else if (RepeatState == true) {
+
+			// Desactivacion del modo repeticion
 			RepeatState = false;
-			// hacer que se desactive (cambio de color), y hacer que se desactive la
-			// repeticion
+			RepeatBt.setFill(Color.WHITE);
+
 		}
 	}
-	
+
 	/**
 	 * Regulacion del volumen
+	 * 
+	 * @param event
 	 */
 	@FXML
-	private void VolumeRegulation() {		/// hacerlo			/////////////////////////////////////
-//		VolumeBar.					// regulacion
+	private void VolumeRegulation(MouseEvent event) { /// hacerlo /////////////////////////////////////
+		double a = VolumeBar.getValue(); // regulacion
+		System.out.println(a);
+		if (a == 0.0) {
+			// player.mute(true);
+			player.mute(true);
+		}
 	}
-	
-	/* 
-	 * FALTA:
-	 * 	-cambio de nombre de cancion
-	 *  -barra de reproduccion
-	 *  -Ventana de busqueda (artista, nombre de cancion, album, letra, genero, puntuacion, año)
-	 *  -Ventana de la otra busqueda (ahorcado raro)
-	 *  -Playlist
-	 *  -Aleatoriedad
-	 *  -Repeticion
-	 *  -Volumen
-	 *  -Barra de reproduccion
-	 *  -Arreglar Next y Previous
-	 */
-	
 }

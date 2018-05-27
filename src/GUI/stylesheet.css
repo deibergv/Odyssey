@@ -32,8 +32,15 @@
     -fx-cursor:hand;
 }
 
+.Repeat-Aleatory-btns:hover{
+    -fx-cursor:hand;
+}
+
 .jfx-progress-bar{
     -fx-accent:#E89511;
+}
+.jfx-VolumeSlider-bar:hover{
+    -fx-cursor:hand;
 }
 
 .linear-grad-to-top{

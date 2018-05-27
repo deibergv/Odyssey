@@ -28,7 +28,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /** A resizable canvas which is resizing on it's parent width without the need of bindings
- * @author GOXR3PLUS
+ * @author deiber
  *
  */
 public class ResizableCanvas extends Canvas {

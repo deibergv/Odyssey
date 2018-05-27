@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="parentSearch" prefHeight="527.0" prefWidth="750.0" styleClass="player" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchController">
+<children>
+      <HBox id="HBox" alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="26.0" prefWidth="741.0" spacing="5.0">
+         <children>
+            <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15" />
+            <Label prefHeight="16.0" prefWidth="56.0" text="Search:" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets left="10.0" />
+               </opaqueInsets>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="filterField" prefHeight="26.0" prefWidth="612.0" HBox.hgrow="ALWAYS" />
+            <FontAwesomeIconView glyphName="CLOSE" onMouseClicked="#CloseWindow" size="20" styleClass="close-btn" wrappingWidth="20.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="table" layoutX="8.0" layoutY="49.0" prefHeight="471.0" prefWidth="734.0">
+         <columns>
+            <TableColumn fx:id="Artist" prefWidth="144.0" text="Artist" />
+            <TableColumn fx:id="Song" prefWidth="143.0" text="Song" />
+            <TableColumn fx:id="Album" prefWidth="131.0" text="Album" />
+            <TableColumn fx:id="Genre" prefWidth="130.0" text="Genre" />
+            <TableColumn fx:id="Score" prefWidth="77.0" text="Score" />
+            <TableColumn fx:id="Released" prefWidth="108.0" text="Released" />
+         </columns>
+      </TableView>
+    </children>
+</AnchorPane>

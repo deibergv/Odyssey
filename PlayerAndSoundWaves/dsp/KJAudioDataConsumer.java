@@ -1,13 +1,8 @@
-/*
- * 
- */
-
 package dsp;
 
 /**
  * The Interface KJAudioDataConsumer.
  * 
- * @author Kris Fudalewski
  */
 public interface KJAudioDataConsumer {
 	

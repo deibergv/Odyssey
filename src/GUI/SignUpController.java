@@ -3,15 +3,21 @@
  */
 package GUI;
 
-import static GUI.WindowCreator.WindowCreator;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -28,48 +34,88 @@ public class SignUpController implements Initializable {
 		this.SecondStage = NewSecondStage;
 	}
 
+	private double xOffset = 0;
+	private double yOffset = 0;
+	AnimationGenerator animationGenerator = null;
+
+	@FXML
+	AnchorPane parentSignUp;
+	@FXML
+	JFXTextField UserField;
+	@FXML
+	JFXPasswordField PassField;
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		makeStageDrageable();
+		animationGenerator = new AnimationGenerator();
+
+	}
+
 	/**
-	 * Cierre de ventana y cambio a ventana Log In
+	 * Creacion de animacion de movimiento de ventana
+	 */
+	public void makeStageDrageable() {
+		parentSignUp.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = event.getSceneX();
+				yOffset = event.getSceneY();
+			}
+		});
+		parentSignUp.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				SecondStage.setX(event.getScreenX() - xOffset);
+				SecondStage.setY(event.getScreenY() - yOffset);
+				SecondStage.setOpacity(0.7f);
+			}
+		});
+		parentSignUp.setOnDragDone((e) -> {
+			SecondStage.setOpacity(1.0f);
+		});
+		parentSignUp.setOnMouseReleased((e) -> {
+			SecondStage.setOpacity(1.0f);
+		});
+	}
+
+	/**
+	 * Cierre de la ventana y cambio a Log In
 	 * 
 	 * @param event
 	 */
 	@FXML
-	private void handleClose(ActionEvent event) {
+	private void CloseWindow(ActionEvent event) {
 		SecondStage.close();
-		WindowCreator("LogInWindow");
+		WindowCreator.WindowCreator("LogInWindow");
 	}
 
-	@FXML
-	private Button BtLogIn;
-
 	/**
-	 * Cambio a ventana de inicio de sesion
-	 * 
-	 * @param event
+	 * Cambio de ventana a Log In para inicio de sesion
 	 */
 	@FXML
 	private void LogIn(ActionEvent event) {
-		SecondStage.close();
-		WindowCreator("LogInWindow");
-	}
 
-	@FXML
-	private Button BtSignUp;
+		SecondStage.close();
+		WindowCreator.WindowCreator("LogInWindow");
+	}
 
 	/**
 	 * Envio de datos al servidor para registro
-	 * 
-	 * @param event
 	 */
 	@FXML
 	private void SignUp(ActionEvent event) {
-		// SecondStage.close(); // if inicia sesion de forma correcta, cierra ventana y
-		// sigue
+
+		if (CreateAcount.CreateAcountData(UserField.getText(), PassField.getText()) == true) {
+
+			JOptionPane.showMessageDialog(new JFrame(), "¡Account created successfully!", "", JOptionPane.INFORMATION_MESSAGE);
+			SecondStage.close();
+
+		} else {
+
+			JOptionPane.showMessageDialog(new JFrame(), "User already exists", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
-	}
 }

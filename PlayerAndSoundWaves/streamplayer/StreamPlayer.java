@@ -66,7 +66,7 @@ import streamplayer.StreamPlayerException.PlayerException;
  * tested under JSE 1.8.x.
  */
 /**
- * @author GOXR3PLUS (www.goxr3plus.co.nf)
+ * @author deiber (www.deiber.co.nf)
  * @author JavaZOOM (www.javazoom.net)
  *
  */
@@ -603,8 +603,8 @@ public class StreamPlayer implements Runnable {
      */
     public boolean pause() {
 	if (sourceDataLine != null && status == Status.PLAYING) {
-	    // sourceDataLine.stop()
-	    // sourceDataLine.flush()
+//	     sourceDataLine.stop();
+//	     sourceDataLine.flush();
 	    status = Status.PAUSED;
 	    logger.info("pausePlayback() completed");
 	    generateEvent(Status.PAUSED, getEncodedStreamPosition(), null);

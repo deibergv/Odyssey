@@ -73,6 +73,11 @@ public class Player extends StackPane implements StreamPlayerListener {
 		streamPlayer.stop();
 	}
 	
+	public void mute(boolean mute) {
+		streamPlayer.setMute(mute);
+		System.out.println(streamPlayer.getMute());
+	}
+	
 	
 	@Override
 	public void opened(Object dataSource, Map<String, Object> properties) {

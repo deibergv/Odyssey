@@ -1,7 +1,3 @@
-/*
- * 
- */
-
 package dsp;
 
 import java.util.ArrayList;
@@ -13,7 +9,7 @@ import javax.sound.sampled.SourceDataLine;
 /**
  * The Class KJDSPAudioDataConsumer.
  *
- * @author Kris Fudalewski
+ * @author deiber
  */
 public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 
@@ -68,7 +64,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
     /**
      * Indicates the Mode of the channel.
      *
-     * @author GOXR3PLUS
+     * @author deiber
      */
     public enum ChannelMode {
 
@@ -82,7 +78,7 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
     /**
      * Indicates the Type of The Sample.
      *
-     * @author GOXR3PLUS
+     * @author deiber
      */
     public enum SampleType {
 

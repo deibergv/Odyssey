@@ -25,7 +25,7 @@ package visualizer;
 /**
  * The Class VisualizerDrawer.
  *
- * @author GOXR3PLUS
+ * @author deiber
  */
 public class VisualizerDrawer extends VisualizerModel {
 

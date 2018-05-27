@@ -1,14 +1,9 @@
-/*
- * 
- */
-
 package dsp;
-
 
 /**
  * The Interface KJDigitalSignalProcessor.
  *
- * @author Kris Fudalewski
+ * @author deiber
  * 
  *         Classes must implement this interface in order to be registered with
  *         the KJDigitalSignalProcessingAudioDataConsumer class.

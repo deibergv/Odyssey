@@ -36,7 +36,7 @@ import javafx.scene.paint.Color;
 /**
  * This SuperClass represents the model of the Visualizer.
  *
- * @author GOXR3PLUS
+ * @author deiber
  * @author JavaZOOM(http://www.javazoom.net)
  */
 public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalProcessor {
@@ -733,7 +733,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * Visualizer Display Mode.
 	 *
-	 * @author GOXR3PLUS
+	 * @author deiber
 	 */
 	public enum DisplayMode {
 

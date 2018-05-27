@@ -2,7 +2,7 @@ package streamplayer;
 /**
      * Status of Stream Player.
      *
-     * @author GOXR3PLUS
+     * @author deiber
      */
     public enum Status {
 
