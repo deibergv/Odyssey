@@ -19,6 +19,8 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javafx.scene.chart.PieChart.Data;
+
 public class CreateAcount {
 
 	static String readFile(String path, Charset encoding) throws IOException {
@@ -29,7 +31,8 @@ public class CreateAcount {
 	public static boolean CreateAcountData(String User, String Name, String Age, String FavoriteGenres, String Pass) {
 
 		String hostname = "127.0.0.1";
-		int port = 9090;
+		int port = 8080;
+		StringBuilder data = new StringBuilder();
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -80,11 +83,8 @@ public class CreateAcount {
 				InputStreamReader reader = new InputStreamReader(input);
 				// System.out.println(output);
 				int character;
-				StringBuilder data = new StringBuilder();
-				System.out.println(data);
 				while ((character = reader.read()) != '\n') {
 					data.append((char) character);
-
 				}
 				// socket.close();
 				System.out.println(data);
@@ -100,6 +100,9 @@ public class CreateAcount {
 
 			System.out.println("I/O error: " + ex.getMessage());
 		}
-		return true;
+		if (data.toString().equals("true"))
+			return true;
+		else
+			return false;
 	}
 }

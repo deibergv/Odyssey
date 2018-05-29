@@ -28,7 +28,8 @@ public class VerifyAcount {
 
 	public static boolean VerifyAcountData(String User, String Pass) {
 		String hostname = "127.0.0.1";
-		int port = 9090;
+		int port = 8080;
+		StringBuilder data = new StringBuilder();
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -76,7 +77,6 @@ public class VerifyAcount {
 				InputStreamReader reader = new InputStreamReader(input);
 				// System.out.println(output);
 				int character;
-				StringBuilder data = new StringBuilder();
 				System.out.println(data);
 				while ((character = reader.read()) != '\n') {
 					data.append((char) character);
@@ -96,6 +96,9 @@ public class VerifyAcount {
 
 			System.out.println("I/O error: " + ex.getMessage());
 		}
-		return true;
+		if (data.toString().equals("true"))
+			return true;
+		else
+			return false;
 	}
 }
