@@ -18,26 +18,41 @@
       </ImageView>
       <AnchorPane layoutX="28.0" layoutY="33.0" prefHeight="381.0" prefWidth="387.0" style="-fx-background-color: #b83110;">
          <children>
-            <JFXTextField fx:id="UserField" focusColor="#626562" layoutX="29.0" layoutY="91.0" prefHeight="28.0" prefWidth="329.0" promptText="User \ e-mail" unFocusColor="#c3b7b7">
+            <JFXTextField fx:id="UserField" focusColor="#626562" layoutX="29.0" layoutY="51.0" prefHeight="28.0" prefWidth="329.0" promptText="User" unFocusColor="#c3b7b7">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField fx:id="PassField" focusColor="#515151" layoutX="29.0" layoutY="157.0" prefHeight="34.0" prefWidth="329.0" promptText="Password" unFocusColor="#c3b7b7">
+            <JFXPasswordField fx:id="PassField" focusColor="#515151" layoutX="29.0" layoutY="254.0" prefHeight="34.0" prefWidth="329.0" promptText="Password" unFocusColor="#c3b7b7">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="255.0" onAction="#SignUp" prefHeight="38.0" prefWidth="329.0" style="-fx-background-color: #ff522b;" text="Sign Up" textAlignment="CENTER" textFill="#c3b8b8">
+            <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="316.0" onAction="#SignUp" prefHeight="38.0" prefWidth="329.0" style="-fx-background-color: #ff522b;" text="Sign Up" textAlignment="CENTER" textFill="#c3b8b8">
                <font>
                   <Font name="Khmer OS System" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="56.0" layoutY="28.0" text="Don't have an account? :(" textFill="#393635">
+            <Label layoutX="58.0" layoutY="14.0" text="Don't have an account? :(" textFill="#393635">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
+            <JFXTextField fx:id="Name" focusColor="#626562" layoutX="29.0" layoutY="99.0" prefHeight="28.0" prefWidth="329.0" promptText="Name" unFocusColor="#c3b7b7">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="Age" focusColor="#626562" layoutX="29.0" layoutY="151.0" prefHeight="28.0" prefWidth="329.0" promptText="Age" unFocusColor="#c3b7b7">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="FavoriteGenres" focusColor="#626562" layoutX="29.0" layoutY="201.0" prefHeight="28.0" prefWidth="329.0" promptText="Favorite genres" unFocusColor="#c3b7b7">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
          </children>
       </AnchorPane>
       <Label layoutX="436.0" layoutY="86.0" text="¡Welcome to Odyssey!" textAlignment="CENTER" textFill="#c3b8b8">

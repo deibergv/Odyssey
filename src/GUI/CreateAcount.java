@@ -26,7 +26,7 @@ public class CreateAcount {
 		return new String(encoded, encoding);
 	}
 
-	public static boolean CreateAcountData(String User, String Pass) {
+	public static boolean CreateAcountData(String User, String Name, String Age, String FavoriteGenres, String Pass) {
 		String hostname = "127.0.0.1";
 		int port = 9090;
 		try {
@@ -44,6 +44,9 @@ public class CreateAcount {
 			rootElement.appendChild(user);
 
 			user.setAttribute("User", User);
+			user.setAttribute("Name", Name);
+			user.setAttribute("Age", Age);
+			user.setAttribute("FavoriteGenres", FavoriteGenres);
 			user.setAttribute("Password", Pass);
 
 			// write the content into xml file

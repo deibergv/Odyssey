@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXSlider?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -20,21 +21,10 @@
             <Insets right="5.0" />
          </HBox.margin>
          <children>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="300.0" styleClass="orange" />
-            <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="141.0">
-               <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0" text="Suffle Mode" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="14.0" />
-                     </font>
-                  </Label>
-                  <JFXToggleButton contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" text=" " toggleColor="#ff9602" toggleLineColor="#b1700e" unToggleColor="WHITE" unToggleLineColor="#b5b5b5">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin></JFXToggleButton>
-               </children>
-            </HBox>
-            <Line endX="100.0" layoutX="150.0" layoutY="202.0" startX="-100.0" stroke="#e89511" />
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="300.0" styleClass="orange" />
+            <Line endX="100.0" layoutX="150.0" layoutY="250.0" startX="-100.0" stroke="#e89511" />
+            <ListView fx:id="listView" layoutX="14.0" layoutY="276.0" prefHeight="288.0" prefWidth="273.0" />
+            <JFXListView layoutX="14.0" layoutY="40.0" prefHeight="185.0" prefWidth="273.0" />
          </children>
       </Pane>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="380.0" styleClass="player" HBox.hgrow="NEVER">
@@ -44,6 +34,10 @@
                   <FontAwesomeIconView glyphName="BARS" layoutX="6.0" layoutY="21.0" onMouseClicked="#Open_or_Close_SideBar" size="1.5em" styleClass="menu-btn" />
                   <FontAwesomeIconView glyphName="CLOSE" layoutX="359.0" layoutY="20.0" onMouseClicked="#Close_app" size="1.5em" styleClass="close-btn" />
                   <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" layoutX="28.0" layoutY="21.0" onMouseClicked="#Search" size="1.5em" styleClass="menu-btn" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="284.0" layoutY="21.0" size="1.5em" styleClass="close-btn" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="COG" layoutX="334.0" layoutY="22.0" size="1.8em" styleClass="close-btn" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="311.0" layoutY="20.0" size="1.5em" styleClass="close-btn" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="SHARE_ALT" layoutX="257.0" layoutY="21.0" size="20" styleClass="close-btn" />
                </children>
             </Pane>
             <Pane layoutY="507.0" prefHeight="73.0" prefWidth="380.0" styleClass="linear-grad-to-bottom">
@@ -51,7 +45,7 @@
                   <MaterialDesignIconView fx:id="PauseAndResumeBt" fill="WHITE" glyphName="PLAY" layoutX="165.0" layoutY="54.0" onMouseClicked="#PauseAndResumeSong" size="50" styleClass="player-btns" text="" />
                   <FontAwesomeIconView fx:id="RepeatBt" fill="WHITE" glyphName="RETWEET" layoutX="25.0" layoutY="41.0" onMouseClicked="#Repeat" size="20" styleClass="Repeat-Aleatory-btns" />
                   <FontAwesomeIconView fx:id="ShuffleBt" fill="WHITE" glyphName="RANDOM" layoutX="68.0" layoutY="42.0" onMouseClicked="#Shuffle" size="20" styleClass="Repeat-Aleatory-btns" />
-                  <JFXSlider fx:id="VolumeBar" layoutX="277.0" layoutY="21.0" onMouseDragged="#VolumeRegulation" prefHeight="28.0" prefWidth="89.0" styleClass="jfx-VolumeSlider-bar" value="100.0" />
+                  <JFXSlider fx:id="VolumeBar" layoutX="277.0" layoutY="21.0" onMouseReleased="#VolumeRegulation" prefHeight="28.0" prefWidth="89.0" styleClass="jfx-VolumeSlider-bar" value="100.0" />
                   <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" layoutX="122.0" layoutY="46.0" onMouseClicked="#Previous" size="30" styleClass="player-btns" />
                   <FontAwesomeIconView fill="WHITE" glyphName="FORWARD" layoutX="230.0" layoutY="47.0" onMouseClicked="#Next" size="30" styleClass="player-btns" text="" />
                </children></Pane>
@@ -61,7 +55,7 @@
                   <Font name="Ebrima" size="14.0" />
                </font>
             </Label>
-            <StackPane fx:id="WavesView" layoutX="12.0" layoutY="169.0" prefHeight="242.0" prefWidth="356.0" />
+            <StackPane fx:id="WavesView" layoutX="12.0" layoutY="138.0" prefHeight="273.0" prefWidth="356.0" />
          </children>
       </Pane>
    </children>

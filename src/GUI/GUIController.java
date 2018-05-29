@@ -8,12 +8,15 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXListView;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
@@ -58,6 +61,13 @@ public class GUIController implements Initializable {
 	@FXML
 	Label NameSong;
 
+	//por si es asi que se le dan las opciones de click de derecho a la lista de canciones
+	@FXML
+	private ListView<String> listView;
+//	private javax.swing.JList<String> jListListaCanciones;
+	@FXML
+	private JFXListView<String> listViewJFX;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		makeStageDrageable();
@@ -168,16 +178,18 @@ public class GUIController implements Initializable {
 	private void Next(MouseEvent event) { /// hacerlo /////////////////////////////////////
 		if (Changesong == true) {
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Switchfoot - Awakening.mp3"));
-
-			PauseAndResumeBt.setGlyphName("PAUSE");
+			player.playSong(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"));
+			NameSong.setText("Switchfoot - Awakening");
+			
+			PauseAndResumeBt.setGlyphName("PAUSE");		// hacer if que compruebe si el boton está en play o pause
 			IsPlaying = true;
 			Changesong = false;
 			//
 		} else if (Changesong == false) {
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Reckless Love.mp3"));
+			player.playSong(new File("/home/deiber/Desktop/Songs/Reckless Love.mp3"));
 			Changesong = true;
+			NameSong.setText("Switchfoot - Awakening");
 		}
 	}
 
@@ -190,7 +202,7 @@ public class GUIController implements Initializable {
 	private void Previous(MouseEvent event) { /// hacerlo /////////////////////////////////////
 		if (Changesong == true) {
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Switchfoot - Awakening.mp3"));
+			player.playSong(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"));
 
 			PauseAndResumeBt.setGlyphName("PAUSE");
 			IsPlaying = true;
@@ -198,7 +210,7 @@ public class GUIController implements Initializable {
 			//
 		} else if (Changesong == false) {
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Reckless Love.mp3"));
+			player.playSong(new File("/home/deiber/Desktop/Songs/Reckless Love.mp3"));
 			Changesong = true;
 		}
 	}
@@ -260,11 +272,75 @@ public class GUIController implements Initializable {
 	 */
 	@FXML
 	private void VolumeRegulation(MouseEvent event) { /// hacerlo /////////////////////////////////////
+
 		double a = VolumeBar.getValue(); // regulacion
-		System.out.println(a);
-		if (a == 0.0) {
-			// player.mute(true);
-			player.mute(true);
-		}
+//		System.out.println(a);
+		player.setVolume(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"), a);
+
+		// System.out.println(a);
+		// if (a == 0.0) {
+		// // player.mute(true);
+		//// player.mute(true);
+		// }
 	}
+	
+	/**
+	 * Regulacion del progreso de reproduccion de la cancion
+	 */
+	@FXML
+	private void ProgressRegulation() {
+//		public void basic_playerlistener(){
+//	        Audio.addBasicPlayerListener(new BasicPlayerListener() {
+//	            @Override//Este metodo se cumple cuando abrimos la cancion...
+//	            public void opened(Object o, Map map) {
+//	               //System.out.println(map);
+//	               
+//	               //LLamamos al metodo para que nos imprima el tiempo de duracion de la cancion....
+//	               CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
+//	               
+//	               new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
+//	               new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
+//
+//	               jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
+//	               jSliderProgresoMp3.setMinimum(0);
+//	            }
+//
+//	            @Override//Este metodo se cumple cuando la cancion esta en progreso....
+//	            public void progress(int i, long l, byte[] bytes, Map propiedades) {				
+//	              
+//	                //LLamamos al este metodo que nos calcula el tiempo trancurrido...
+//	                CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
+//
+//	                Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
+//	                bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());               
+//	                jSliderProgresoMp3.setValue((int)bytesTranscurrido);                     
+//	            }
+//
+//	            @Override
+//	            public void stateUpdated(BasicPlayerEvent bpe) {
+//	                    
+//	                if (!bloquear){
+//	                    if (Audio.getStatus()==2 & repitaCancion){
+//	                        jButtonReproducir.doClick();
+//	                    }
+//	                    if (jListListaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
+//	                        if (Audio.getStatus()==2 & siguiente){
+//	                            int pista = jListListaCanciones.getAnchorSelectionIndex();                            
+//	                            jListListaCanciones.setSelectedIndex(pista+1);
+//	                            repaint();
+//	                            jButtonReproducir.doClick();
+//	                        }
+//	                    }
+//	                }                
+//	            }
+//
+//	            @Override
+//	            public void setController(BasicController bc) {
+//	                
+//	            }
+//	        });
+//	        
+//	    }
+	}
+	
 }

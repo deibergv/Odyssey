@@ -73,12 +73,24 @@ public class Player extends StackPane implements StreamPlayerListener {
 		streamPlayer.stop();
 	}
 	
-	public void mute(boolean mute) {
-		streamPlayer.setMute(mute);
-		System.out.println(streamPlayer.getMute());
+//	public void mute(boolean mute) {
+//		streamPlayer.setMute(mute);
+//		System.out.println(streamPlayer.getMute());
+//	}
+	
+	public void setVolume(File file, double volume){
+		try {
+		streamPlayer.open(file);
+		streamPlayer.setGain(volume);
+		
+	} catch (StreamPlayerException e) {
+		e.printStackTrace();
+	}
 	}
 	
-	
+	/**
+	 * Creacion de las SoundWaves
+	 */
 	@Override
 	public void opened(Object dataSource, Map<String, Object> properties) {
 

@@ -66,7 +66,7 @@ import streamplayer.StreamPlayerException.PlayerException;
  * tested under JSE 1.8.x.
  */
 /**
- * @author deiber (www.deiber.co.nf)
+ * @author deiber
  * @author JavaZOOM (www.javazoom.net)
  *
  */
@@ -1228,6 +1228,9 @@ public class StreamPlayer implements Runnable {
      */
     public void setGain(double fGain) {
 	if (isPlaying() || isPaused())
+		
+		
+		System.out.println("ENTRE AL PRIMER if");
 	    if (hasControl(FloatControl.Type.MASTER_GAIN, gainControl)) {
 		/*
 		 * //logger.info("Gain : " + fGain); // double minGainDB =
@@ -1239,6 +1242,8 @@ public class StreamPlayer implements Runnable {
 		 * m_gainControl.setValue((float) valueDB);
 		 */
 
+	    	System.out.println("ENTRE AL segundo y cambié el volumen");
+	    	
 		// Better type
 		gainControl.setValue((float) (20 * Math.log10(fGain == 0.0 ? 0.0000 : fGain)));
 		// OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))

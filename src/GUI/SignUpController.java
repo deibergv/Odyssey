@@ -43,8 +43,16 @@ public class SignUpController implements Initializable {
 	@FXML
 	JFXTextField UserField;
 	@FXML
+	JFXTextField Name;
+	@FXML
+	JFXTextField Age;
+	@FXML
+	JFXTextField FavoriteGenres;
+	@FXML
 	JFXPasswordField PassField;
-
+//	@FXML
+//	JFXTextField Friends;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		makeStageDrageable();
@@ -106,7 +114,8 @@ public class SignUpController implements Initializable {
 	@FXML
 	private void SignUp(ActionEvent event) {
 
-		if (CreateAcount.CreateAcountData(UserField.getText(), PassField.getText()) == true) {
+		if (CreateAcount.CreateAcountData(UserField.getText(), Name.getText(), Age.getText(),
+				FavoriteGenres.getText(), PassField.getText()) == true) {//, Friends.getText()) == true) {
 
 			JOptionPane.showMessageDialog(new JFrame(), "¡Account created successfully!", "", JOptionPane.INFORMATION_MESSAGE);
 			SecondStage.close();

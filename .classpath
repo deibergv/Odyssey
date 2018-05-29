@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="PlayerAndSoundWaves"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-openjdk-amd64"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/jflac-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/jfoenix-8.0.4.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/jmactritonusspi1.74.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/jspeex0.9.7.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/mp3spi1.9.5.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/tritonus_remaining-0.3.6.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/tritonus_share-0.3.6.jar"/>
+	<classpathentry kind="lib" path="/home/deiber/eclipse-workspace/GUIprincipal/resources/libraries/vorbis-support-1.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
