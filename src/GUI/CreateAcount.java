@@ -26,7 +26,10 @@ public class CreateAcount {
 		return new String(encoded, encoding);
 	}
 
-	public static boolean CreateAcountData(String User, String Name, String Age, String FavoriteGenres, String Pass) {
+	// public static boolean CreateAcountData(String User, String Name, String Age,
+	// String FavoriteGenres, String Pass) {
+	public static boolean CreateAcountData(String User, String Pass) {
+
 		String hostname = "127.0.0.1";
 		int port = 9090;
 		try {
@@ -44,16 +47,16 @@ public class CreateAcount {
 			rootElement.appendChild(user);
 
 			user.setAttribute("User", User);
-			user.setAttribute("Name", Name);
-			user.setAttribute("Age", Age);
-			user.setAttribute("FavoriteGenres", FavoriteGenres);
-			user.setAttribute("Password", Pass);
+//			user.setAttribute("Name", Name);
+			// user.setAttribute("Age", Age);
+			// user.setAttribute("FavoriteGenres", FavoriteGenres);
+			 user.setAttribute("Password", Pass);
 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("LogInAcountData.xml"));
+			StreamResult result = new StreamResult(new File("SignUpAcountData.xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
@@ -70,7 +73,7 @@ public class CreateAcount {
 
 		try (Socket socket = new Socket(hostname, port)) {
 
-			String contenido = readFile("LogInAcountData.xml", Charset.defaultCharset());
+			String contenido = readFile("SignUpAcountData.xml", Charset.defaultCharset());
 			OutputStream output = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(output, true);
 			writer.println(contenido);
