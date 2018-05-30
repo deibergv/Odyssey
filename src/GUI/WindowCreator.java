@@ -86,6 +86,21 @@ public class WindowCreator {
 				SecondStage.initOwner(PrincipalStage);
 				SecondStage.setTitle("Odyssey - Search - Odyssey");
 				SecondStage.show();
+			} else if ("SearchOptions".equals(WindowName)) {
+
+				FXMLLoader loader = new FXMLLoader(Launch.class.getResource(WindowName + ".fxml"));
+				AnchorPane SecondPane = (AnchorPane) loader.load();
+				Stage SecondStage = new Stage();
+				Scene scene = new Scene(SecondPane);
+				SecondStage.setScene(scene);
+				FilterController controller = loader.getController();
+				controller.setSecondStage(SecondStage);
+				SecondStage.setResizable(false);
+				SecondStage.initModality(Modality.WINDOW_MODAL);
+				SecondStage.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de arriba
+				SecondStage.initOwner(PrincipalStage);
+				SecondStage.setTitle("Odyssey - Search - Odyssey");
+				SecondStage.show();
 			}
 		} catch (IOException ex) {
 			System.out.println(ex.toString());

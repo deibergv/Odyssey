@@ -2,6 +2,8 @@ package GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -36,6 +38,8 @@ public class SearchController implements Initializable {
 
 	@FXML
 	private AnchorPane parentSearch;
+	@FXML
+	private FontAwesomeIconView search;
 	@FXML
 	private TableView<Table> table;
 	@FXML
@@ -139,6 +143,11 @@ public class SearchController implements Initializable {
 	@FXML
 	private void CloseWindow(MouseEvent event) {
 		SecondStage.close();
+	}
+	
+	@FXML
+	private void SearchIcon(MouseEvent event) {
+		WindowCreator.WindowCreator("SearchOptions");
 	}
 	
 }
