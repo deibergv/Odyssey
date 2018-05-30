@@ -8,8 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -26,6 +28,7 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 //import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
+import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 import com.jfoenix.controls.JFXListView;
 
@@ -56,6 +59,8 @@ public class GUIController implements Initializable {
 	Player player = null;
 	Visualizer visualizer = null;
 	StreamPlayer streamPlayer = null;
+	
+	private int minsum = 0;
 
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -99,7 +104,7 @@ public class GUIController implements Initializable {
 		PauseAndResumeBt.setDisable(true);
 		
 	}
-	
+
 	/**
 	 * Creacion de animacion de movimiento de ventana
 	 */
@@ -147,6 +152,10 @@ public class GUIController implements Initializable {
 	}
 
 	Integer NumberSong = 0;
+	@FXML
+	Label Duration;
+	@FXML
+	Label Time;
 
 	/**
 	 * Opciones de lista
@@ -166,43 +175,49 @@ public class GUIController implements Initializable {
 
 		String songname = listView.getItems().get(index);
 		Caratula(songname);
-		
+
 		File SongDuration = new File(SongPath);
 		try {
-//		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SongDuration);
-//		AudioFormat format = audioInputStream.getFormat();
-//		long frames = audioInputStream.getFrameLength();
-//		double durationInSeconds = (frames+0.0) / format.getFrameRate();
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SongDuration);
-			AudioFormat format = audioInputStream.getFormat();
-			long audioFileLength = SongDuration.length();
-			int frameSize = format.getFrameSize();
-			float frameRate = format.getFrameRate();
-			float durationInSeconds = (audioFileLength / (frameSize * frameRate));
-		
-		
-		System.out.println(durationInSeconds);
+			Duration.setText(getDurationWithMp3Spi(SongDuration));
+			String time = getDurationWithMp3Spi(SongDuration);
+			String[] minsec = time.split(":");
+			int min = Integer.parseInt(minsec[0]);
+			int sec = Integer.parseInt(minsec[1]);
+			int totalSec = sec + min*60;
+			minsum = totalSec/10000;
+			Duration.setVisible(true);
+			//metodo que lleve el tiempo transcurrido
+			Time.setVisible(true);
 		} catch (Exception e) {
-			// TODO: handle exception
+			 System.out.println("Error al conseguir tiempo de duracion: " + e);
 		}
+		ProgressRegulation.start();
 	}
-	
-//	private static void getDurationWithMp3Spi(File file) throws UnsupportedAudioFileException, IOException {
-//
-//	    AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
-//	    if (fileFormat instanceof TAudioFileFormat) {
-//	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
-//	        String key = "duration";
-//	        Long microseconds = (Long) properties.get(key);
-//	        int mili = (int) (microseconds / 1000);
-//	        int sec = (mili / 1000) % 60;
-//	        int min = (mili / 1000) / 60;
-//	        System.out.println("time = " + min + ":" + sec);
-//	    } else {
-//	        throw new UnsupportedAudioFileException();
-//	    }
-//
-//	}
+
+	/**
+	 * Metodo utilizado par conseguir la duracion de la cancion
+	 * 
+	 * @param file
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 */
+	private static String getDurationWithMp3Spi(File file) throws UnsupportedAudioFileException, IOException {
+
+		AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
+		if (fileFormat instanceof TAudioFileFormat) {
+			Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
+			String key = "duration";
+			Long microseconds = (Long) properties.get(key);
+			int mili = (int) (microseconds / 1000);
+			int sec = (mili / 1000) % 60;
+			int min = (mili / 1000) / 60;
+			String TimeDuration = (min + ":" + sec);
+			return TimeDuration;
+		} else {
+			throw new UnsupportedAudioFileException();
+		}
+
+	}
 
 	public void ListDelete(int index) {
 		listView.getItems().remove(index);
@@ -250,10 +265,12 @@ public class GUIController implements Initializable {
 			player.pauseSong();
 			PauseAndResumeBt.setGlyphName("PLAY");
 			IsPlaying = false;
+			ProgressRegulation.stop();
 		} else if (IsPlaying == false) {
 			player.resumeSong();
 			PauseAndResumeBt.setGlyphName("PAUSE");
 			IsPlaying = true;
+			ProgressRegulation.resume();
 		}
 	}
 
@@ -421,7 +438,7 @@ public class GUIController implements Initializable {
 
 	@FXML
 	private void Caratula(String namesong) {
-		
+
 		if (namesong.compareTo("Kansas - Dust in the Wind - Point of Know Return") == 0) {
 			Image ImageSong = new Image("/GUI/img/Point of Know Return.jpg", 245, 180, false, true);
 			caratula.setImage(ImageSong);
@@ -436,6 +453,24 @@ public class GUIController implements Initializable {
 			caratula.setImage(ImageSong);
 		}
 	}
+	
+	/**
+	 * Regulacion del progreso de reproduccion de la cancion
+	 */
+	Thread ProgressRegulation = new Thread(new Runnable() {
+		int a = 0;
+        public void run() {
+    			TimePlaying.setProgress(a);
+    			try {
+    				Thread.sleep(1000);
+    			} catch (Exception e) {
+    				
+    			}
+    			a+= minsum;
+    			
+        }
+   });  
+
 
 	// private final BasicPlayer Audio = new BasicPlayer();
 	//
@@ -497,11 +532,5 @@ public class GUIController implements Initializable {
 	//
 	// }
 
-	/**
-	 * Regulacion del progreso de reproduccion de la cancion
-	 */
-	@FXML
-	private void ProgressRegulation() {
-	}
 
 }
