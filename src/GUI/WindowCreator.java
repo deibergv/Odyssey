@@ -90,17 +90,17 @@ public class WindowCreator {
 
 				FXMLLoader loader = new FXMLLoader(Launch.class.getResource(WindowName + ".fxml"));
 				AnchorPane SecondPane = (AnchorPane) loader.load();
-				Stage SecondStage = new Stage();
+				Stage ThirdStage = new Stage();
 				Scene scene = new Scene(SecondPane);
-				SecondStage.setScene(scene);
+				ThirdStage.setScene(scene);
 				FilterController controller = loader.getController();
-				controller.setSecondStage(SecondStage);
-				SecondStage.setResizable(false);
-				SecondStage.initModality(Modality.WINDOW_MODAL);
-				SecondStage.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de arriba
-				SecondStage.initOwner(PrincipalStage);
-				SecondStage.setTitle("Odyssey - Search - Odyssey");
-				SecondStage.show();
+				controller.setSecondStage(ThirdStage);
+				ThirdStage.setResizable(false);
+				ThirdStage.initModality(Modality.WINDOW_MODAL);
+				ThirdStage.initStyle(StageStyle.UNDECORATED); // quita barra de opciones de arriba
+				ThirdStage.initOwner(PrincipalStage);
+				ThirdStage.setTitle("Odyssey - Search - Odyssey");
+				ThirdStage.show();
 			}
 		} catch (IOException ex) {
 			System.out.println(ex.toString());

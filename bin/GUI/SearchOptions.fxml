@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="223.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FilterController">
+<children>
+      <VBox layoutX="30.0" layoutY="23.0" prefHeight="148.0" prefWidth="414.0" spacing="7.0">
+         <children>
+            <HBox layoutX="15.0" layoutY="61.0" prefHeight="157.0" prefWidth="404.0" spacing="30.0">
+               <children>
+                  <Label prefHeight="16.0" prefWidth="138.0" text="Seleccione filtro :">
+                     <HBox.margin>
+                        <Insets left="7.0" top="15.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="2.0" />
+                     </padding>
+                  </Label>
+                  <VBox prefHeight="53.0" prefWidth="251.0" spacing="7.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="artista" mnemonicParsing="false" prefHeight="18.0" prefWidth="139.0" text="Artista" />
+                              <RadioButton fx:id="album" mnemonicParsing="false" prefHeight="18.0" prefWidth="164.0" text="Album" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                           <children>
+                              <RadioButton fx:id="cancion" mnemonicParsing="false" prefHeight="18.0" prefWidth="138.0" text="Cancion" />
+                              <RadioButton fx:id="letra" disable="true" mnemonicParsing="false" prefHeight="18.0" prefWidth="164.0" text="Letra" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Button layoutX="142.0" layoutY="183.0" onAction="#CloseWindow" text="Aceptar" />
+        <Button layoutX="256.0" layoutY="183.0" onAction="#CloseWindow" text="Cancelar" />
+    </children>
+</AnchorPane>

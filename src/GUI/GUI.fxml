@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -16,7 +15,7 @@
 
 <HBox fx:id="parent" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="693.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
    <children>
-      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
+      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets right="5.0" />
          </HBox.margin>
@@ -25,9 +24,8 @@
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="FILE_AUDIO_ALT" layoutX="14.0" layoutY="20.0" onMouseClicked="#SearchDirectory" size="1.5em" styleClass="menuBar-btn" />
                </children></Pane>
-            <Line endX="100.0" layoutX="150.0" layoutY="250.0" startX="-100.0" stroke="#e89511" />
-            <ListView fx:id="listView" layoutX="14.0" layoutY="276.0" prefHeight="288.0" prefWidth="273.0" />
-            <JFXListView layoutX="14.0" layoutY="40.0" prefHeight="185.0" prefWidth="273.0" />
+            <Line endX="100.0" layoutX="150.0" layoutY="339.0" startX="-100.0" stroke="#e89511" />
+            <ListView fx:id="listView" layoutX="14.0" layoutY="35.0" prefHeight="288.0" prefWidth="273.0" />
          </children>
       </Pane>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="380.0" styleClass="player" HBox.hgrow="NEVER">
@@ -53,7 +51,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="FORWARD" layoutX="230.0" layoutY="47.0" onMouseClicked="#Next" size="30" styleClass="player-btns" text="" />
                </children></Pane>
             <JFXProgressBar fx:id="TimePlaying" layoutX="12.0" layoutY="491.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="356.0" progress="0.51" styleClass="jfx-progress-bar" />
-            <Label fx:id="NameSong" alignment="CENTER" layoutX="91.0" layoutY="458.0" text="Playing: Awakening - Swichtfoot" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="NameSong" alignment="CENTER" layoutX="91.0" layoutY="458.0" text=" " textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>

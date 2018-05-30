@@ -20,7 +20,7 @@ public class Launch extends Application {
 	public void start(Stage PrincipalStage) throws Exception {
 		this.PrincipalStage = PrincipalStage;
 		WindowCreator.WindowCreator("GUI");
-		WindowCreator.WindowCreator("LogInWindow");
+//		WindowCreator.WindowCreator("LogInWindow");
 	}
 
 	/**

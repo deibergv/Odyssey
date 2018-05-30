@@ -64,25 +64,20 @@ public class GUIController implements Initializable {
 	@FXML
 	private StackPane WavesView;
 	@FXML
-	MaterialDesignIconView PauseAndResumeBt;
+	private MaterialDesignIconView PauseAndResumeBt;
 	@FXML
-	FontAwesomeIconView RepeatBt;
+	private FontAwesomeIconView RepeatBt;
 	@FXML
-	FontAwesomeIconView ShuffleBt;
+	private FontAwesomeIconView ShuffleBt;
 	@FXML
-	Slider VolumeBar;
+	private Slider VolumeBar;
 	@FXML
-	ProgressBar TimePlaying;
+	private ProgressBar TimePlaying;
 	@FXML
-	Label NameSong;
-
-	//por si es asi que se le dan las opciones de click de derecho a la lista de canciones
+	private Label NameSong;
 	@FXML
 	private ListView<String> listView;
-//	private javax.swing.JList<String> jListListaCanciones;
-	@FXML
-	private JFXListView<String> listViewJFX;
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		makeStageDrageable();
@@ -94,6 +89,7 @@ public class GUIController implements Initializable {
 		streamPlayer = new StreamPlayer();
 		player = new Player(visualizer, streamPlayer);
 
+		listView.setCellFactory(lv -> new ListCellWithContextMenu(this));
 	}
 
 	/**
@@ -140,6 +136,34 @@ public class GUIController implements Initializable {
 				Sidebar.setVisible(false);
 			});
 		}
+	}
+
+	/**
+	 * Opciones de lista
+	 * 
+	 * @param index
+	 */
+	public void PlayListIndex(int index) {
+		String SongPath = DataList.get(index);
+		player.stopSong();
+		player.playSong(new File(SongPath));
+		IsPlaying = true;
+		String SongName = listView.getItems().get(index);
+		NameSong.setText(SongName);
+		PauseAndResumeBt.setGlyphName("PAUSE");
+	}
+
+	public void ListDelete(int index) {
+		listView.getItems().remove(index);
+	}
+
+	public void OrderList(ListView<String> list) {
+		// ventana de seleccion de modo de orden
+		// llamar al servidor para que ordene
+	}
+
+	public void ListEdit(int index) {
+		listView.edit(index);
 	}
 
 	/**
@@ -195,8 +219,8 @@ public class GUIController implements Initializable {
 			player.stopSong();
 			player.playSong(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"));
 			NameSong.setText("Switchfoot - Awakening");
-			
-			PauseAndResumeBt.setGlyphName("PAUSE");		// hacer if que compruebe si el boton está en play o pause
+
+			PauseAndResumeBt.setGlyphName("PAUSE"); // hacer if que compruebe si el boton está en play o pause
 			IsPlaying = true;
 			Changesong = false;
 			//
@@ -290,138 +314,120 @@ public class GUIController implements Initializable {
 
 		double VolumeValue = VolumeBar.getValue(); // regulacion
 		System.out.println(VolumeValue);
-//		player.setVolume(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"), a);
 		player.setVolume(VolumeValue);
-		// System.out.println(a);
-		// if (a == 0.0) {
-		// // player.mute(true);
-		//// player.mute(true);
-		// }
 	}
-	
+
 	private String rute = "/home/deiber/";
-    private final JFileChooser abrirFile  = new JFileChooser(new File(rute));
-    FileNameExtensionFilter filtrado = new FileNameExtensionFilter("Only mp3","mp3");
-    private javax.swing.JPanel ArchiveSearchWindow;
-    private File archive= null;
-//    private Tag tag;
-    private  AudioFile audiofile = new AudioFile();
-//    private final String Font1="Georgia";
-    private final ArrayList<String> DataList = new ArrayList<>();
-    private String AddSongs[]= new String[10];
-    private javax.swing.JList<String> jListListaCanciones;
-    /**
+	private final JFileChooser abrirFile = new JFileChooser(new File(rute));
+	FileNameExtensionFilter filtrado = new FileNameExtensionFilter("Only mp3", "mp3");
+	private javax.swing.JPanel ArchiveSearchWindow;
+	private File archive = null;
+	private AudioFile audiofile = new AudioFile();
+	private final ArrayList<String> DataList = new ArrayList<>();
+
+	/**
 	 * Agregado de canciones
 	 * 
 	 * @param event
 	 */
 	@FXML
-	private void SearchDirectory(MouseEvent event) {                                                  
-        
-        abrirFile.setDialogTitle("Ruta Absoluta Busqueda..");
-        abrirFile.setFileFilter(filtrado);
-        abrirFile.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        
-        
-        if (abrirFile.showOpenDialog(ArchiveSearchWindow)==0){
-            File file = new File(""+abrirFile.getSelectedFile());        
-            
-            String mp3Comprove = file.getName(); //Obtenemos el nombre del archivo...
-            mp3Comprove = mp3Comprove.substring(mp3Comprove.length()-3,mp3Comprove.length());//Obtenemos los tres ultimos caracteres de la cadena de nombre...
-            
-            /**
-             * Comprobacion de existencia del archivo
-             * Comprobacion de tipo de archivo .mp3
-             */
-            if (file.exists()& mp3Comprove.equals("mp3")){
-                
-                archive = abrirFile.getSelectedFile(); //Ruta del archivo..
-                                 
-                try {
-                    audiofile = AudioFileIO.read(archive);
-//                    tag =  audiofile.getTag();
-     
-                } catch (CannotReadException | IOException | TagException | 
-                        ReadOnlyFileException | InvalidAudioFrameException ex) {
-                }                     
-                rute = abrirFile.getCurrentDirectory().toString();
-//                new JLaTexto(Font1, "Ruta: "+ rute,jLabelRuta , Color.WHITE, 15);
-              
-                DataList.add(archive.toString());
-                
-                AddSongs = new String[DataList.size()];
-              
-                int x=0;
-                for (String cancion:DataList){
-                    File introduce = new File(cancion);
-                    AddSongs[x] = introduce.getName();
-                    x++;
-                }
-                jListListaCanciones.setListData(AddSongs);
-//                listView.set
-//                listViewJFX.
-//                JLaEtiquetas(archive);
-            }            
-        }       
-    }
-	
+	private void SearchDirectory(MouseEvent event) {
+
+		abrirFile.setDialogTitle("Ruta Absoluta Busqueda..");
+		abrirFile.setFileFilter(filtrado);
+		abrirFile.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+		if (abrirFile.showOpenDialog(ArchiveSearchWindow) == 0) {
+			File file = new File("" + abrirFile.getSelectedFile());
+
+			String mp3Comprove = file.getName(); // Obtenemos el nombre del archivo...
+			mp3Comprove = mp3Comprove.substring(mp3Comprove.length() - 3, mp3Comprove.length());// Obtenemos los tres
+
+			/**
+			 * Comprobacion de existencia del archivo Comprobacion de tipo de archivo .mp3
+			 */
+			if (file.exists() & mp3Comprove.equals("mp3")) {
+
+				archive = abrirFile.getSelectedFile(); // Ruta del archivo...
+
+				try {
+					audiofile = AudioFileIO.read(archive);
+
+				} catch (CannotReadException | IOException | TagException | ReadOnlyFileException
+						| InvalidAudioFrameException ex) {
+				}
+				rute = abrirFile.getCurrentDirectory().toString();
+
+				DataList.add(archive.toString()); // archive.toString() saca el path
+
+				String SongName = archive.getName();
+				SongName = SongName.substring(0, SongName.length() - 4);
+				listView.getItems().add(SongName);
+			}
+		}
+	}
+
 	/**
 	 * Regulacion del progreso de reproduccion de la cancion
 	 */
 	@FXML
 	private void ProgressRegulation() {
-//		public void basic_playerlistener(){
-//	        Audio.addBasicPlayerListener(new BasicPlayerListener() {
-//	            @Override//Este metodo se cumple cuando abrimos la cancion...
-//	            public void opened(Object o, Map map) {
-//	               //System.out.println(map);
-//	               
-//	               //LLamamos al metodo para que nos imprima el tiempo de duracion de la cancion....
-//	               CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
-//	               
-//	               new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c, 15);
-//	               new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"), jLabelFRate, c, 15);
-//
-//	               jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
-//	               jSliderProgresoMp3.setMinimum(0);
-//	            }
-//
-//	            @Override//Este metodo se cumple cuando la cancion esta en progreso....
-//	            public void progress(int i, long l, byte[] bytes, Map propiedades) {				
-//	              
-//	                //LLamamos al este metodo que nos calcula el tiempo trancurrido...
-//	                CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(), "Transcurrido: ", jLabelTranscurrido);
-//
-//	                Object bytesTranscurrido =  propiedades.get("mp3.position.byte");
-//	                bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());               
-//	                jSliderProgresoMp3.setValue((int)bytesTranscurrido);                     
-//	            }
-//
-//	            @Override
-//	            public void stateUpdated(BasicPlayerEvent bpe) {
-//	                    
-//	                if (!bloquear){
-//	                    if (Audio.getStatus()==2 & repitaCancion){
-//	                        jButtonReproducir.doClick();
-//	                    }
-//	                    if (jListListaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
-//	                        if (Audio.getStatus()==2 & siguiente){
-//	                            int pista = jListListaCanciones.getAnchorSelectionIndex();                            
-//	                            jListListaCanciones.setSelectedIndex(pista+1);
-//	                            repaint();
-//	                            jButtonReproducir.doClick();
-//	                        }
-//	                    }
-//	                }                
-//	            }
-//
-//	            @Override
-//	            public void setController(BasicController bc) {
-//	                
-//	            }
-//	        });
-//	        
-//	    }
+		// public void basic_playerlistener(){
+		// Audio.addBasicPlayerListener(new BasicPlayerListener() {
+		// @Override//Este metodo se cumple cuando abrimos la cancion...
+		// public void opened(Object o, Map map) {
+		// //System.out.println(map);
+		//
+		// //LLamamos al metodo para que nos imprima el tiempo de duracion de la
+		// cancion....
+		// CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
+		//
+		// new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c,
+		// 15);
+		// new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"),
+		// jLabelFRate, c, 15);
+		//
+		// jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
+		// jSliderProgresoMp3.setMinimum(0);
+		// }
+		//
+		// @Override//Este metodo se cumple cuando la cancion esta en progreso....
+		// public void progress(int i, long l, byte[] bytes, Map propiedades) {
+		//
+		// //LLamamos al este metodo que nos calcula el tiempo trancurrido...
+		// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(),
+		// "Transcurrido: ", jLabelTranscurrido);
+		//
+		// Object bytesTranscurrido = propiedades.get("mp3.position.byte");
+		// bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());
+		// jSliderProgresoMp3.setValue((int)bytesTranscurrido);
+		// }
+		//
+		// @Override
+		// public void stateUpdated(BasicPlayerEvent bpe) {
+		//
+		// if (!bloquear){
+		// if (Audio.getStatus()==2 & repitaCancion){
+		// jButtonReproducir.doClick();
+		// }
+		// if (jListListaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
+		// if (Audio.getStatus()==2 & siguiente){
+		// int pista = jListListaCanciones.getAnchorSelectionIndex();
+		// jListListaCanciones.setSelectedIndex(pista+1);
+		// repaint();
+		// jButtonReproducir.doClick();
+		// }
+		// }
+		// }
+		// }
+		//
+		// @Override
+		// public void setController(BasicController bc) {
+		//
+		// }
+		// });
+		//
+		// }
 	}
-	
+
 }
