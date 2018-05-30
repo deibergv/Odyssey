@@ -65,7 +65,7 @@ public class Player extends StackPane implements StreamPlayerListener {
 	public void resumeSong() {
 		// ---------------------- Pause the Media
 		System.out.println("resuming ...");
-		streamPlayer.pause();
+		streamPlayer.resume();
 	}
 	
 	public void stopSong() {
@@ -78,14 +78,15 @@ public class Player extends StackPane implements StreamPlayerListener {
 //		System.out.println(streamPlayer.getMute());
 //	}
 	
-	public void setVolume(File file, double volume){
-		try {
-		streamPlayer.open(file);
+//	public void setVolume(File file, double volume){
+		public void setVolume(double volume){
+//		try {
+//		streamPlayer.open(file);
 		streamPlayer.setGain(volume);
 		
-	} catch (StreamPlayerException e) {
-		e.printStackTrace();
-	}
+//	} catch (StreamPlayerException e) {
+//		e.printStackTrace();
+//	}
 	}
 	
 	/**

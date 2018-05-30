@@ -21,7 +21,10 @@
             <Insets right="5.0" />
          </HBox.margin>
          <children>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="300.0" styleClass="orange" />
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="300.0" styleClass="orange">
+               <children>
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILE_AUDIO_ALT" layoutX="14.0" layoutY="20.0" onMouseClicked="#SearchDirectory" size="1.5em" styleClass="menuBar-btn" />
+               </children></Pane>
             <Line endX="100.0" layoutX="150.0" layoutY="250.0" startX="-100.0" stroke="#e89511" />
             <ListView fx:id="listView" layoutX="14.0" layoutY="276.0" prefHeight="288.0" prefWidth="273.0" />
             <JFXListView layoutX="14.0" layoutY="40.0" prefHeight="185.0" prefWidth="273.0" />

@@ -24,6 +24,14 @@
     -fx-cursor: hand;
 }
 
+.menuBar-btn{
+    -fx-fill: #fff;
+}
+.menuBar-btn:hover{
+    -fx-fill: #43596E;
+    -fx-cursor: hand;
+}
+
 .player-btns{
     -fx-fill:#fff;
 }

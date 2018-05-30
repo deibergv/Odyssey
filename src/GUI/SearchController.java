@@ -56,7 +56,6 @@ public class SearchController implements Initializable {
 	public ObservableList<Table> list = FXCollections.observableArrayList(
 
 			new Table("Swichtfoot", "Awakening", "Oh! Gravity", "Rock, Pop", "★★★★★", "2006"),
-			new Table("Swichtfoot", "Mess Of Me", "Hello Hurricane", "Rock", "★★★★⭐", "2009"),
 			new Table("The Paper Kites", "Bloom", "Woodland - EP", "Folk", "★★★⭐⭐", "2011")
 	// ⭐⭐⭐⭐⭐⭐⭐★★★★★★★
 	);

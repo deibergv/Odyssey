@@ -5,8 +5,23 @@
 package GUI;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.html.HTML.Tag;
+
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.tag.FieldKey;
+//import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.TagException;
 
 import com.jfoenix.controls.JFXListView;
 
@@ -187,7 +202,7 @@ public class GUIController implements Initializable {
 			//
 		} else if (Changesong == false) {
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Songs/Reckless Love.mp3"));
+			player.playSong(new File("/home/deiber/Desktop/Songs/The Paper Kites - Bloom.mp3"));
 			Changesong = true;
 			NameSong.setText("Switchfoot - Awakening");
 		}
@@ -210,7 +225,7 @@ public class GUIController implements Initializable {
 			//
 		} else if (Changesong == false) {
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Songs/Reckless Love.mp3"));
+			player.playSong(new File("/home/deiber/Desktop/Songs/The Paper Kites - Bloom.mp3"));
 			Changesong = true;
 		}
 	}
@@ -273,16 +288,82 @@ public class GUIController implements Initializable {
 	@FXML
 	private void VolumeRegulation(MouseEvent event) { /// hacerlo /////////////////////////////////////
 
-		double a = VolumeBar.getValue(); // regulacion
-//		System.out.println(a);
-		player.setVolume(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"), a);
-
+		double VolumeValue = VolumeBar.getValue(); // regulacion
+		System.out.println(VolumeValue);
+//		player.setVolume(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"), a);
+		player.setVolume(VolumeValue);
 		// System.out.println(a);
 		// if (a == 0.0) {
 		// // player.mute(true);
 		//// player.mute(true);
 		// }
 	}
+	
+	private String rute = "/home/deiber/";
+    private final JFileChooser abrirFile  = new JFileChooser(new File(rute));
+    FileNameExtensionFilter filtrado = new FileNameExtensionFilter("Only mp3","mp3");
+    private javax.swing.JPanel ArchiveSearchWindow;
+    private File archive= null;
+//    private Tag tag;
+    private  AudioFile audiofile = new AudioFile();
+//    private final String Font1="Georgia";
+    private final ArrayList<String> DataList = new ArrayList<>();
+    private String AddSongs[]= new String[10];
+    private javax.swing.JList<String> jListListaCanciones;
+    /**
+	 * Agregado de canciones
+	 * 
+	 * @param event
+	 */
+	@FXML
+	private void SearchDirectory(MouseEvent event) {                                                  
+        
+        abrirFile.setDialogTitle("Ruta Absoluta Busqueda..");
+        abrirFile.setFileFilter(filtrado);
+        abrirFile.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        
+        
+        if (abrirFile.showOpenDialog(ArchiveSearchWindow)==0){
+            File file = new File(""+abrirFile.getSelectedFile());        
+            
+            String mp3Comprove = file.getName(); //Obtenemos el nombre del archivo...
+            mp3Comprove = mp3Comprove.substring(mp3Comprove.length()-3,mp3Comprove.length());//Obtenemos los tres ultimos caracteres de la cadena de nombre...
+            
+            /**
+             * Comprobacion de existencia del archivo
+             * Comprobacion de tipo de archivo .mp3
+             */
+            if (file.exists()& mp3Comprove.equals("mp3")){
+                
+                archive = abrirFile.getSelectedFile(); //Ruta del archivo..
+                                 
+                try {
+                    audiofile = AudioFileIO.read(archive);
+//                    tag =  audiofile.getTag();
+     
+                } catch (CannotReadException | IOException | TagException | 
+                        ReadOnlyFileException | InvalidAudioFrameException ex) {
+                }                     
+                rute = abrirFile.getCurrentDirectory().toString();
+//                new JLaTexto(Font1, "Ruta: "+ rute,jLabelRuta , Color.WHITE, 15);
+              
+                DataList.add(archive.toString());
+                
+                AddSongs = new String[DataList.size()];
+              
+                int x=0;
+                for (String cancion:DataList){
+                    File introduce = new File(cancion);
+                    AddSongs[x] = introduce.getName();
+                    x++;
+                }
+                jListListaCanciones.setListData(AddSongs);
+//                listView.set
+//                listViewJFX.
+//                JLaEtiquetas(archive);
+            }            
+        }       
+    }
 	
 	/**
 	 * Regulacion del progreso de reproduccion de la cancion
