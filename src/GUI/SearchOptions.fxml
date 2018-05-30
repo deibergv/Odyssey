@@ -26,14 +26,14 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                            <children>
-                              <RadioButton fx:id="Entero" mnemonicParsing="false" prefHeight="18.0" prefWidth="139.0" text="Artista" />
-                              <RadioButton fx:id="Flotante" mnemonicParsing="false" prefHeight="18.0" prefWidth="164.0" text="Album" />
+                              <RadioButton fx:id="artista" mnemonicParsing="false" prefHeight="18.0" prefWidth="139.0" text="Artista" />
+                              <RadioButton fx:id="album" mnemonicParsing="false" prefHeight="18.0" prefWidth="164.0" text="Album" />
                            </children>
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                            <children>
-                              <RadioButton fx:id="Cadena" mnemonicParsing="false" prefHeight="18.0" prefWidth="138.0" text="Cancion" />
-                              <RadioButton fx:id="FechaHora" disable="true" mnemonicParsing="false" prefHeight="18.0" prefWidth="164.0" text="Letra" />
+                              <RadioButton fx:id="cancion" mnemonicParsing="false" prefHeight="18.0" prefWidth="138.0" text="Cancion" />
+                              <RadioButton fx:id="letra" disable="true" mnemonicParsing="false" prefHeight="18.0" prefWidth="164.0" text="Letra" />
                            </children>
                         </HBox>
                      </children>

@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -23,6 +25,14 @@ public class FilterController implements Initializable {
 	private Button aceptar;
 	@FXML
 	private Button cerrar;
+	@FXML
+	private RadioButton artista;
+	@FXML
+	private RadioButton cancion;
+	@FXML
+	private RadioButton album;
+	@FXML
+	private RadioButton letra;
 	
 	/**
 	 * Cierre de la ventana
@@ -31,12 +41,19 @@ public class FilterController implements Initializable {
 	 */
 	@FXML
 	private void CloseWindow(ActionEvent event) {
-		System.exit(0);
+		SecondStage.close();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		final ToggleGroup group = new ToggleGroup();
 		
+		artista.setToggleGroup(group);
+		artista.setSelected(true);
+		cancion.setToggleGroup(group);
+		album.setToggleGroup(group);
+//		letra.setToggleGroup(group);
 	}
+	
+	
 }

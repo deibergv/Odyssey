@@ -14,7 +14,6 @@
 <children>
       <HBox id="HBox" alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="26.0" prefWidth="741.0" spacing="5.0">
          <children>
-            <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15" />
             <Label prefHeight="16.0" prefWidth="56.0" text="Search:" textFill="WHITE">
                <opaqueInsets>
                   <Insets left="10.0" />
@@ -24,6 +23,7 @@
                </font>
             </Label>
             <TextField fx:id="filterField" prefHeight="26.0" prefWidth="612.0" HBox.hgrow="ALWAYS" />
+            <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" onMouseClicked="#SearchIcon" size="15" styleClass="menu-btn" />
             <FontAwesomeIconView glyphName="CLOSE" onMouseClicked="#CloseWindow" size="20" styleClass="close-btn" wrappingWidth="20.0" />
          </children>
          <opaqueInsets>

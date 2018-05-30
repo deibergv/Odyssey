@@ -23,7 +23,7 @@
                </font>
             </Label>
             <TextField fx:id="filterField" prefHeight="26.0" prefWidth="612.0" HBox.hgrow="ALWAYS" />
-            <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" onMouseClicked="#SearchIcon" size="15" />
+            <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" onMouseClicked="#SearchIcon" size="15" styleClass="menu-btn" />
             <FontAwesomeIconView glyphName="CLOSE" onMouseClicked="#CloseWindow" size="20" styleClass="close-btn" wrappingWidth="20.0" />
          </children>
          <opaqueInsets>
