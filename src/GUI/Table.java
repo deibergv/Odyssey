@@ -1,13 +1,14 @@
 package GUI;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.TableCell;
 
 /**
  * Constructor de la tabla
  *
  * @author deiber
  */
-public class Table { ///////////////Parametros base de Tabla////////////////////
+public class Table extends TableCell{ ///////////////Parametros base de Tabla////////////////////
 	
     private final SimpleStringProperty Artist;
     private final SimpleStringProperty Song;

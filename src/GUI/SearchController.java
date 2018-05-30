@@ -59,7 +59,9 @@ public class SearchController implements Initializable {
 
 	public ObservableList<Table> list = FXCollections.observableArrayList(
 
+			new Table("Kansas", "Dust in the Wind", "Point of Know Return", "Soft Rock", "★★★★⭐", "1977"),
 			new Table("Swichtfoot", "Awakening", "Oh! Gravity", "Rock, Pop", "★★★★★", "2006"),
+			new Table("The Lumineers", "Ophelia", "Cleopatra", "Folk", "★★⭐⭐⭐", "2016"),
 			new Table("The Paper Kites", "Bloom", "Woodland - EP", "Folk", "★★★⭐⭐", "2011")
 	// ⭐⭐⭐⭐⭐⭐⭐★★★★★★★
 	);
@@ -150,4 +152,12 @@ public class SearchController implements Initializable {
 		WindowCreator.WindowCreator("SearchOptions");
 	}
 	
+//	@FXML
+//	private void addToTable(MouseEvent event) {
+//		Table a = new Table("Swichtfoot", "Awakening", "Oh! Gravity", "Rock, Pop", "★★★★★", "2006");
+//		table.getItems().add(a);
+//		
+////		Table selectedItem = table.getSelectionModel().getSelectedItem();
+////		    table.getItems().remove(selectedItem);
+//	}
 }

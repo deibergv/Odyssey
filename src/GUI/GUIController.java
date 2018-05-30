@@ -10,6 +10,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.html.HTML.Tag;
@@ -34,6 +38,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -90,8 +96,10 @@ public class GUIController implements Initializable {
 		player = new Player(visualizer, streamPlayer);
 
 		listView.setCellFactory(lv -> new ListCellWithContextMenu(this));
+		PauseAndResumeBt.setDisable(true);
+		
 	}
-
+	
 	/**
 	 * Creacion de animacion de movimiento de ventana
 	 */
@@ -154,7 +162,47 @@ public class GUIController implements Initializable {
 		NameSong.setText(SongName);
 		PauseAndResumeBt.setGlyphName("PAUSE");
 		NumberSong = index;
+		PauseAndResumeBt.setDisable(false);
+
+		String songname = listView.getItems().get(index);
+		Caratula(songname);
+		
+		File SongDuration = new File(SongPath);
+		try {
+//		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SongDuration);
+//		AudioFormat format = audioInputStream.getFormat();
+//		long frames = audioInputStream.getFrameLength();
+//		double durationInSeconds = (frames+0.0) / format.getFrameRate();
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SongDuration);
+			AudioFormat format = audioInputStream.getFormat();
+			long audioFileLength = SongDuration.length();
+			int frameSize = format.getFrameSize();
+			float frameRate = format.getFrameRate();
+			float durationInSeconds = (audioFileLength / (frameSize * frameRate));
+		
+		
+		System.out.println(durationInSeconds);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
+	
+//	private static void getDurationWithMp3Spi(File file) throws UnsupportedAudioFileException, IOException {
+//
+//	    AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
+//	    if (fileFormat instanceof TAudioFileFormat) {
+//	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
+//	        String key = "duration";
+//	        Long microseconds = (Long) properties.get(key);
+//	        int mili = (int) (microseconds / 1000);
+//	        int sec = (mili / 1000) % 60;
+//	        int min = (mili / 1000) / 60;
+//	        System.out.println("time = " + min + ":" + sec);
+//	    } else {
+//	        throw new UnsupportedAudioFileException();
+//	    }
+//
+//	}
 
 	public void ListDelete(int index) {
 		listView.getItems().remove(index);
@@ -313,7 +361,9 @@ public class GUIController implements Initializable {
 
 		double VolumeValue = VolumeBar.getValue(); // regulacion
 		System.out.println(VolumeValue);
-		player.setVolume(VolumeValue);
+		// player.setVolume(VolumeValue);
+		// System.out.println("soy el float: " + (float)VolumeValue);
+		// VolumeControl.setVolume((float)VolumeValue);
 	}
 
 	private String rute = "/home/deiber/";
@@ -366,67 +416,92 @@ public class GUIController implements Initializable {
 		}
 	}
 
+	@FXML
+	ImageView caratula;
+
+	@FXML
+	private void Caratula(String namesong) {
+		
+		if (namesong.compareTo("Kansas - Dust in the Wind - Point of Know Return") == 0) {
+			Image ImageSong = new Image("/GUI/img/Point of Know Return.jpg", 245, 180, false, true);
+			caratula.setImage(ImageSong);
+		} else if (namesong.compareTo("Switchfoot - Awakening - Oh! Gravity") == 0) {
+			Image ImageSong = new Image("/GUI/img/Oh Gravity!.jpg", 245, 180, false, true);
+			caratula.setImage(ImageSong);
+		} else if (namesong.compareTo("The Lumineers - Ophelia - Cleopatra") == 0) {
+			Image ImageSong = new Image("/GUI/img/Cleopatra.jpg", 245, 180, false, true);
+			caratula.setImage(ImageSong);
+		} else if (namesong.compareTo("The Paper Kites - Bloom - Woodland - EP") == 0) {
+			Image ImageSong = new Image("/GUI/img/Woodland - EP.jpeg", 245, 180, false, true);
+			caratula.setImage(ImageSong);
+		}
+	}
+
+	// private final BasicPlayer Audio = new BasicPlayer();
+	//
+	// public void basic_playerlistener() {
+	// Audio.addBasicPlayerListener(new BasicPlayerListener() {
+	// @Override // Este metodo se cumple cuando abrimos la cancion...
+	// public void opened(Object o, Map map) {
+	// // System.out.println(map);
+	//
+	// // LLamamos al metodo para que nos imprima el tiempo de duracion de la
+	// // cancion....
+	// CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
+	//
+	// new JLaTexto(fuente1, "Tasa de bits: " + map.get("bitrate"), jLabelBitrate,
+	// c, 15);
+	// new JLaTexto(fuente1, "Velocidad Muestreo: " + map.get("mp3.frequency.hz"),
+	// jLabelFRate, c, 15);
+	//
+	// jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
+	// jSliderProgresoMp3.setMinimum(0);
+	// }
+	//
+	// @Override // Este metodo se cumple cuando la cancion esta en progreso....
+	// public void progress(int i, long l, byte[] bytes, Map propiedades) {
+	//
+	// // LLamamos al este metodo que nos calcula el tiempo trancurrido...
+	// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(),
+	// "Transcurrido: ",
+	// jLabelTranscurrido);
+	//
+	// Object bytesTranscurrido = propiedades.get("mp3.position.byte");
+	// bytesTranscurrido = Integer.parseInt(bytesTranscurrido.toString());
+	// jSliderProgresoMp3.setValue((int) bytesTranscurrido);
+	// }
+	//
+	// @Override
+	// public void stateUpdated(BasicPlayerEvent bpe) {
+	//
+	// if (!bloquear) {
+	// if (Audio.getStatus() == 2 & repitaCancion) {
+	// jButtonReproducir.doClick();
+	// }
+	// if (jListListaCanciones.getSelectedIndex() + 1 != agregaCanciones.length) {
+	// if (Audio.getStatus() == 2 & siguiente) {
+	// int pista = jListListaCanciones.getAnchorSelectionIndex();
+	// jListListaCanciones.setSelectedIndex(pista + 1);
+	// repaint();
+	// jButtonReproducir.doClick();
+	// }
+	// }
+	// }
+	// }
+	//
+	// @Override
+	// public void setController(BasicController bc) {
+	//
+	// }
+	// });
+	//
+	// }
+
 	/**
 	 * Regulacion del progreso de reproduccion de la cancion
 	 */
 	@FXML
 	private void ProgressRegulation() {
-		// public void basic_playerlistener(){
-		// Audio.addBasicPlayerListener(new BasicPlayerListener() {
-		// @Override//Este metodo se cumple cuando abrimos la cancion...
-		// public void opened(Object o, Map map) {
-		// //System.out.println(map);
-		//
-		// //LLamamos al metodo para que nos imprima el tiempo de duracion de la
-		// cancion....
-		// CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
-		//
-		// new JLaTexto(fuente1, "Tasa de bits: "+map.get("bitrate"), jLabelBitrate, c,
-		// 15);
-		// new JLaTexto(fuente1, "Velocidad Muestreo: "+map.get("mp3.frequency.hz"),
-		// jLabelFRate, c, 15);
-		//
-		// jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
-		// jSliderProgresoMp3.setMinimum(0);
-		// }
-		//
-		// @Override//Este metodo se cumple cuando la cancion esta en progreso....
-		// public void progress(int i, long l, byte[] bytes, Map propiedades) {
-		//
-		// //LLamamos al este metodo que nos calcula el tiempo trancurrido...
-		// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(),
-		// "Transcurrido: ", jLabelTranscurrido);
-		//
-		// Object bytesTranscurrido = propiedades.get("mp3.position.byte");
-		// bytesTranscurrido= Integer.parseInt(bytesTranscurrido.toString());
-		// jSliderProgresoMp3.setValue((int)bytesTranscurrido);
-		// }
-		//
-		// @Override
-		// public void stateUpdated(BasicPlayerEvent bpe) {
-		//
-		// if (!bloquear){
-		// if (Audio.getStatus()==2 & repitaCancion){
-		// jButtonReproducir.doClick();
-		// }
-		// if (jListListaCanciones.getSelectedIndex()+1!=agregaCanciones.length){
-		// if (Audio.getStatus()==2 & siguiente){
-		// int pista = jListListaCanciones.getAnchorSelectionIndex();
-		// jListListaCanciones.setSelectedIndex(pista+1);
-		// repaint();
-		// jButtonReproducir.doClick();
-		// }
-		// }
-		// }
-		// }
-		//
-		// @Override
-		// public void setController(BasicController bc) {
-		//
-		// }
-		// });
-		//
-		// }
 	}
 
 }
