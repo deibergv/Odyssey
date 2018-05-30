@@ -138,6 +138,8 @@ public class GUIController implements Initializable {
 		}
 	}
 
+	Integer NumberSong = 0;
+
 	/**
 	 * Opciones de lista
 	 * 
@@ -151,6 +153,7 @@ public class GUIController implements Initializable {
 		String SongName = listView.getItems().get(index);
 		NameSong.setText(SongName);
 		PauseAndResumeBt.setGlyphName("PAUSE");
+		NumberSong = index;
 	}
 
 	public void ListDelete(int index) {
@@ -206,29 +209,25 @@ public class GUIController implements Initializable {
 		}
 	}
 
-	boolean Changesong = true; // regulacion de cancion // Borrar luego
-
 	/**
 	 * Salto a siguiente cancion
 	 * 
 	 * @param event
 	 */
 	@FXML
-	private void Next(MouseEvent event) { /// hacerlo /////////////////////////////////////
-		if (Changesong == true) {
+	private void Next(MouseEvent event) {
+		if (NumberSong < DataList.size() - 1) {
+			NumberSong = NumberSong + 1;
+			String SongPath = DataList.get(NumberSong);
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"));
-			NameSong.setText("Switchfoot - Awakening");
-
-			PauseAndResumeBt.setGlyphName("PAUSE"); // hacer if que compruebe si el boton está en play o pause
+			player.playSong(new File(SongPath));
 			IsPlaying = true;
-			Changesong = false;
-			//
-		} else if (Changesong == false) {
-			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Songs/The Paper Kites - Bloom.mp3"));
-			Changesong = true;
-			NameSong.setText("Switchfoot - Awakening");
+			String SongName = listView.getItems().get(NumberSong);
+			NameSong.setText(SongName);
+			PauseAndResumeBt.setGlyphName("PAUSE");
+			listView.getSelectionModel().select(NumberSong);
+			listView.getFocusModel().focus(NumberSong);
+			listView.scrollTo(NumberSong);
 		}
 	}
 
@@ -238,19 +237,19 @@ public class GUIController implements Initializable {
 	 * @param event
 	 */
 	@FXML
-	private void Previous(MouseEvent event) { /// hacerlo /////////////////////////////////////
-		if (Changesong == true) {
+	private void Previous(MouseEvent event) {
+		if (NumberSong > 0) {
+			NumberSong = NumberSong - 1;
+			String SongPath = DataList.get(NumberSong);
 			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Songs/Switchfoot - Awakening.mp3"));
-
-			PauseAndResumeBt.setGlyphName("PAUSE");
+			player.playSong(new File(SongPath));
 			IsPlaying = true;
-			Changesong = false;
-			//
-		} else if (Changesong == false) {
-			player.stopSong();
-			player.playSong(new File("/home/deiber/Desktop/Songs/The Paper Kites - Bloom.mp3"));
-			Changesong = true;
+			String SongName = listView.getItems().get(NumberSong);
+			NameSong.setText(SongName);
+			PauseAndResumeBt.setGlyphName("PAUSE");
+			listView.getSelectionModel().select(NumberSong);
+			listView.getFocusModel().focus(NumberSong);
+			listView.scrollTo(NumberSong);
 		}
 	}
 
