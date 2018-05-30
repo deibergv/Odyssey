@@ -57,7 +57,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" layoutX="122.0" layoutY="46.0" onMouseClicked="#Previous" size="30" styleClass="player-btns" />
                   <FontAwesomeIconView fill="WHITE" glyphName="FORWARD" layoutX="230.0" layoutY="47.0" onMouseClicked="#Next" size="30" styleClass="player-btns" text="" />
                </children></Pane>
-            <JFXProgressBar fx:id="TimePlaying" layoutX="43.0" layoutY="494.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2.0" prefWidth="292.0" progress="0.51" styleClass="jfx-progress-bar" />
+            <JFXProgressBar fx:id="TimePlaying" layoutX="43.0" layoutY="494.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2.0" prefWidth="292.0" progress="0.0" styleClass="jfx-progress-bar" />
             <Label fx:id="NameSong" alignment="CENTER" layoutX="30.0" layoutY="455.0" text=" " textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Ebrima" size="14.0" />

@@ -55,12 +55,16 @@ import visualizer.Visualizer;
  * @author deiber Controlador de la ventana Principal
  */
 public class GUIController implements Initializable {
+	
+	Thread ProgressRegulation = null;
 
 	Player player = null;
 	Visualizer visualizer = null;
 	StreamPlayer streamPlayer = null;
 	
-	private int minsum = 0;
+	private double minsum = 0.0;
+	private int totalsec = 0;
+	private int secondsR = 0;
 
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -163,6 +167,22 @@ public class GUIController implements Initializable {
 	 * @param index
 	 */
 	public void PlayListIndex(int index) {
+		IsPlaying = false;
+		try {
+			if (ProgressRegulation != null) {
+				if (ProgressRegulation.isAlive()) {
+					ProgressRegulation.join();
+				}
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		ProgressRegulation = null;
+		totalsec = 0;
+		secondsR = 0;
+		TimePlaying.setProgress(0);
+
 		String SongPath = DataList.get(index);
 		player.stopSong();
 		player.playSong(new File(SongPath));
@@ -183,15 +203,33 @@ public class GUIController implements Initializable {
 			String[] minsec = time.split(":");
 			int min = Integer.parseInt(minsec[0]);
 			int sec = Integer.parseInt(minsec[1]);
-			int totalSec = sec + min*60;
-			minsum = totalSec/10000;
+			totalsec = sec + min*60;
+//			minsum = (double)secondsR/totalSec/100;
 			Duration.setVisible(true);
 			//metodo que lleve el tiempo transcurrido
 			Time.setVisible(true);
+			ProgressRegulation = new Thread(new Runnable() {
+				public void run() {
+					while (IsPlaying) {
+						String TimeTrans = String.valueOf((int)secondsR/60)+
+								":"+String.valueOf(secondsR%60);
+//						Time.setText(TimeTrans);
+						System.out.println(TimeTrans);
+						minsum = (double)secondsR/totalsec;
+						TimePlaying.setProgress(minsum);
+						secondsR++;
+						try {
+							Thread.sleep(1000);
+						} catch (Exception e) {
+				    				
+				    	}		
+					}
+			}
+			});  
+			ProgressRegulation.start();
 		} catch (Exception e) {
 			 System.out.println("Error al conseguir tiempo de duracion: " + e);
 		}
-		ProgressRegulation.start();
 	}
 
 	/**
@@ -261,16 +299,38 @@ public class GUIController implements Initializable {
 	 */
 	@FXML
 	private void PauseAndResumeSong(MouseEvent event) {
+		
 		if (IsPlaying == true) {
 			player.pauseSong();
 			PauseAndResumeBt.setGlyphName("PLAY");
 			IsPlaying = false;
-			ProgressRegulation.stop();
+			try {
+				if (ProgressRegulation.isAlive()) {
+					ProgressRegulation.join();
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		} else if (IsPlaying == false) {
 			player.resumeSong();
 			PauseAndResumeBt.setGlyphName("PAUSE");
 			IsPlaying = true;
-			ProgressRegulation.resume();
+			
+			ProgressRegulation = new Thread(new Runnable() {
+				public void run() {
+					while (IsPlaying) {
+						minsum = (double)secondsR/totalsec;
+						TimePlaying.setProgress(minsum);
+						secondsR++;
+						try {
+							Thread.sleep(1000);
+						} catch (Exception e) {
+				    				
+				    	}		
+					}
+			}
+			});  
+			ProgressRegulation.start();
 		}
 	}
 
@@ -283,16 +343,7 @@ public class GUIController implements Initializable {
 	private void Next(MouseEvent event) {
 		if (NumberSong < DataList.size() - 1) {
 			NumberSong = NumberSong + 1;
-			String SongPath = DataList.get(NumberSong);
-			player.stopSong();
-			player.playSong(new File(SongPath));
-			IsPlaying = true;
-			String SongName = listView.getItems().get(NumberSong);
-			NameSong.setText(SongName);
-			PauseAndResumeBt.setGlyphName("PAUSE");
-			listView.getSelectionModel().select(NumberSong);
-			listView.getFocusModel().focus(NumberSong);
-			listView.scrollTo(NumberSong);
+			PlayListIndex(NumberSong);
 		}
 	}
 
@@ -305,17 +356,7 @@ public class GUIController implements Initializable {
 	private void Previous(MouseEvent event) {
 		if (NumberSong > 0) {
 			NumberSong = NumberSong - 1;
-			String SongPath = DataList.get(NumberSong);
-			player.stopSong();
-			player.playSong(new File(SongPath));
-			IsPlaying = true;
-			String SongName = listView.getItems().get(NumberSong);
-			NameSong.setText(SongName);
-			PauseAndResumeBt.setGlyphName("PAUSE");
-			listView.getSelectionModel().select(NumberSong);
-			listView.getFocusModel().focus(NumberSong);
-			listView.scrollTo(NumberSong);
-		}
+			PlayListIndex(NumberSong);		}
 	}
 
 	boolean ShuffleState = false; // Flag Shuffle Button State
@@ -453,84 +494,4 @@ public class GUIController implements Initializable {
 			caratula.setImage(ImageSong);
 		}
 	}
-	
-	/**
-	 * Regulacion del progreso de reproduccion de la cancion
-	 */
-	Thread ProgressRegulation = new Thread(new Runnable() {
-		int a = 0;
-        public void run() {
-    			TimePlaying.setProgress(a);
-    			try {
-    				Thread.sleep(1000);
-    			} catch (Exception e) {
-    				
-    			}
-    			a+= minsum;
-    			
-        }
-   });  
-
-
-	// private final BasicPlayer Audio = new BasicPlayer();
-	//
-	// public void basic_playerlistener() {
-	// Audio.addBasicPlayerListener(new BasicPlayerListener() {
-	// @Override // Este metodo se cumple cuando abrimos la cancion...
-	// public void opened(Object o, Map map) {
-	// // System.out.println(map);
-	//
-	// // LLamamos al metodo para que nos imprima el tiempo de duracion de la
-	// // cancion....
-	// CalculoSecundero(map.get("duration").toString(), "Duracion: ", jLabelTiempo);
-	//
-	// new JLaTexto(fuente1, "Tasa de bits: " + map.get("bitrate"), jLabelBitrate,
-	// c, 15);
-	// new JLaTexto(fuente1, "Velocidad Muestreo: " + map.get("mp3.frequency.hz"),
-	// jLabelFRate, c, 15);
-	//
-	// jSliderProgresoMp3.setMaximum(Integer.parseInt(map.get("mp3.length.bytes").toString()));
-	// jSliderProgresoMp3.setMinimum(0);
-	// }
-	//
-	// @Override // Este metodo se cumple cuando la cancion esta en progreso....
-	// public void progress(int i, long l, byte[] bytes, Map propiedades) {
-	//
-	// // LLamamos al este metodo que nos calcula el tiempo trancurrido...
-	// CalculoSecundero(propiedades.get("mp3.position.microseconds").toString(),
-	// "Transcurrido: ",
-	// jLabelTranscurrido);
-	//
-	// Object bytesTranscurrido = propiedades.get("mp3.position.byte");
-	// bytesTranscurrido = Integer.parseInt(bytesTranscurrido.toString());
-	// jSliderProgresoMp3.setValue((int) bytesTranscurrido);
-	// }
-	//
-	// @Override
-	// public void stateUpdated(BasicPlayerEvent bpe) {
-	//
-	// if (!bloquear) {
-	// if (Audio.getStatus() == 2 & repitaCancion) {
-	// jButtonReproducir.doClick();
-	// }
-	// if (jListListaCanciones.getSelectedIndex() + 1 != agregaCanciones.length) {
-	// if (Audio.getStatus() == 2 & siguiente) {
-	// int pista = jListListaCanciones.getAnchorSelectionIndex();
-	// jListListaCanciones.setSelectedIndex(pista + 1);
-	// repaint();
-	// jButtonReproducir.doClick();
-	// }
-	// }
-	// }
-	// }
-	//
-	// @Override
-	// public void setController(BasicController bc) {
-	//
-	// }
-	// });
-	//
-	// }
-
-
 }
