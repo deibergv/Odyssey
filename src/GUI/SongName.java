@@ -19,17 +19,18 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class VerifyAcount {
+public class SongName {
 
 	static String readFile(String path, Charset encoding) throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return new String(encoded, encoding);
 	}
 
-	public static boolean VerifyAcountData(String User, String Pass) {
+	public static void Song(String name, String album, String año, String crude, String genero, String letra) {
+
 		String hostname = "172.18.30.36";
 		int port = 8080;
-		StringBuilder data = new StringBuilder();
+
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -37,21 +38,31 @@ public class VerifyAcount {
 
 			// root elements
 			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("EnviarUsuarios");
+			Element rootElement = doc.createElement("EnviarCancion");
 			doc.appendChild(rootElement);
 
-			// user elements
-			Element user = doc.createElement("Usuario");
+			// staff elements
+			Element user = doc.createElement("Cancion");
 			rootElement.appendChild(user);
 
-			user.setAttribute("User", User);
-			user.setAttribute("Password", Pass);
+			// set attribute to staff element
+			// Attr attr = doc.createAttribute("id");
+			// attr.setValue("1");
+			// staff.setAttributeNode(attr);
+
+			// shorten way
+			user.setAttribute("nombre", name);
+			user.setAttribute("ano", año);
+			user.setAttribute("genero", genero);
+			user.setAttribute("crudo", crude);
+			user.setAttribute("album", album);
+			user.setAttribute("letra", letra);
 
 			// write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("LogInAcountData.xml"));
+			StreamResult result = new StreamResult(new File("C:\\file.xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
@@ -67,8 +78,11 @@ public class VerifyAcount {
 		}
 
 		try (Socket socket = new Socket(hostname, port)) {
-
-			String contenido = readFile("LogInAcountData.xml", Charset.defaultCharset());
+			// File archivo = new File("/home/tony/CLionProjects/users.xml");
+			// if(!archivo.exists()){
+			// archivo.createNewFile();
+			// }
+			String contenido = readFile("C:\\file.xml", Charset.defaultCharset());
 			OutputStream output = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(output, true);
 			writer.println(contenido);
@@ -77,12 +91,13 @@ public class VerifyAcount {
 				InputStreamReader reader = new InputStreamReader(input);
 				// System.out.println(output);
 				int character;
+				StringBuilder data = new StringBuilder();
 				System.out.println(data);
 				while ((character = reader.read()) != '\n') {
 					data.append((char) character);
 
 				}
-				// socket.close();
+				socket.close();
 				System.out.println(data);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -96,9 +111,6 @@ public class VerifyAcount {
 
 			System.out.println("I/O error: " + ex.getMessage());
 		}
-		if (data.toString().equals("true"))
-			return true;
-		else
-			return false;
 	}
+
 }

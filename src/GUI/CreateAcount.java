@@ -30,7 +30,7 @@ public class CreateAcount {
 
 	public static boolean CreateAcountData(String User, String Name, String Age, String FavoriteGenres, String Pass) {
 
-		String hostname = "127.0.0.1";
+		String hostname = "172.18.30.36";
 		int port = 8080;
 		StringBuilder data = new StringBuilder();
 		try {

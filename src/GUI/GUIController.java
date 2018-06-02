@@ -55,13 +55,13 @@ import visualizer.Visualizer;
  * @author deiber Controlador de la ventana Principal
  */
 public class GUIController implements Initializable {
-	
+
 	Thread ProgressRegulation = null;
 
 	Player player = null;
 	Visualizer visualizer = null;
 	StreamPlayer streamPlayer = null;
-	
+
 	private double minsum = 0.0;
 	private int totalsec = 0;
 	private int secondsR = 0;
@@ -106,7 +106,7 @@ public class GUIController implements Initializable {
 
 		listView.setCellFactory(lv -> new ListCellWithContextMenu(this));
 		PauseAndResumeBt.setDisable(true);
-		
+
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class GUIController implements Initializable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		ProgressRegulation = null;
 		totalsec = 0;
 		secondsR = 0;
@@ -203,32 +203,31 @@ public class GUIController implements Initializable {
 			String[] minsec = time.split(":");
 			int min = Integer.parseInt(minsec[0]);
 			int sec = Integer.parseInt(minsec[1]);
-			totalsec = sec + min*60;
-//			minsum = (double)secondsR/totalSec/100;
+			totalsec = sec + min * 60;
+			// minsum = (double)secondsR/totalSec/100;
 			Duration.setVisible(true);
-			//metodo que lleve el tiempo transcurrido
+			// metodo que lleve el tiempo transcurrido
 			Time.setVisible(true);
 			ProgressRegulation = new Thread(new Runnable() {
 				public void run() {
 					while (IsPlaying) {
-						String TimeTrans = String.valueOf((int)secondsR/60)+
-								":"+String.valueOf(secondsR%60);
-//						Time.setText(TimeTrans);
+						String TimeTrans = String.valueOf((int) secondsR / 60) + ":" + String.valueOf(secondsR % 60);
+						// Time.setText(TimeTrans);
 						System.out.println(TimeTrans);
-						minsum = (double)secondsR/totalsec;
+						minsum = (double) secondsR / totalsec;
 						TimePlaying.setProgress(minsum);
 						secondsR++;
 						try {
 							Thread.sleep(1000);
 						} catch (Exception e) {
-				    				
-				    	}		
+
+						}
 					}
-			}
-			});  
+				}
+			});
 			ProgressRegulation.start();
 		} catch (Exception e) {
-			 System.out.println("Error al conseguir tiempo de duracion: " + e);
+			System.out.println("Error al conseguir tiempo de duracion: " + e);
 		}
 	}
 
@@ -299,7 +298,7 @@ public class GUIController implements Initializable {
 	 */
 	@FXML
 	private void PauseAndResumeSong(MouseEvent event) {
-		
+
 		if (IsPlaying == true) {
 			player.pauseSong();
 			PauseAndResumeBt.setGlyphName("PLAY");
@@ -315,21 +314,21 @@ public class GUIController implements Initializable {
 			player.resumeSong();
 			PauseAndResumeBt.setGlyphName("PAUSE");
 			IsPlaying = true;
-			
+
 			ProgressRegulation = new Thread(new Runnable() {
 				public void run() {
 					while (IsPlaying) {
-						minsum = (double)secondsR/totalsec;
+						minsum = (double) secondsR / totalsec;
 						TimePlaying.setProgress(minsum);
 						secondsR++;
 						try {
 							Thread.sleep(1000);
 						} catch (Exception e) {
-				    				
-				    	}		
+
+						}
 					}
-			}
-			});  
+				}
+			});
 			ProgressRegulation.start();
 		}
 	}
@@ -344,6 +343,9 @@ public class GUIController implements Initializable {
 		if (NumberSong < DataList.size() - 1) {
 			NumberSong = NumberSong + 1;
 			PlayListIndex(NumberSong);
+			listView.getSelectionModel().select(NumberSong);
+			listView.getFocusModel().focus(NumberSong);
+			listView.scrollTo(NumberSong);
 		}
 	}
 
@@ -356,7 +358,11 @@ public class GUIController implements Initializable {
 	private void Previous(MouseEvent event) {
 		if (NumberSong > 0) {
 			NumberSong = NumberSong - 1;
-			PlayListIndex(NumberSong);		}
+			PlayListIndex(NumberSong);
+			listView.getSelectionModel().select(NumberSong);
+			listView.getFocusModel().focus(NumberSong);
+			listView.scrollTo(NumberSong);
+		}
 	}
 
 	boolean ShuffleState = false; // Flag Shuffle Button State
@@ -467,9 +473,11 @@ public class GUIController implements Initializable {
 
 				DataList.add(archive.toString()); // archive.toString() saca el path
 
-				String SongName = archive.getName();
-				SongName = SongName.substring(0, SongName.length() - 4);
-				listView.getItems().add(SongName);
+				String Song = archive.getName();
+				Song = Song.substring(0, Song.length() - 4);
+				listView.getItems().add(Song);
+				String crude = Base64MP3.encodeToB64(archive.toString());
+				SongName.Song(archive.getName(), "Point of Know Return", "1977", crude.substring(1, 100), "Soft Rock", "asd");
 			}
 		}
 	}

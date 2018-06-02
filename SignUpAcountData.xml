@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><EnviarUsuarios><Usuario Age="20" FavoriteGenres="Rock, folk, indie" Name="deiber" Password="123asd" User="Dei"/></EnviarUsuarios>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><VerificarUsuarios><Usuario Age="20" FavoriteGenres="rock" Name="ki" Password="123" User="dei666"/></VerificarUsuarios>
