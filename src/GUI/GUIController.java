@@ -12,25 +12,18 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.html.HTML.Tag;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.FieldKey;
-//import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
-
-import com.jfoenix.controls.JFXListView;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -41,8 +34,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -194,7 +185,6 @@ public class GUIController implements Initializable {
 		PauseAndResumeBt.setDisable(false);
 
 		String songname = listView.getItems().get(index);
-		Caratula(songname);
 
 		File SongDuration = new File(SongPath);
 		try {
@@ -426,7 +416,6 @@ public class GUIController implements Initializable {
 		double VolumeValue = VolumeBar.getValue(); // regulacion
 		System.out.println(VolumeValue);
 		// player.setVolume(VolumeValue);
-		// System.out.println("soy el float: " + (float)VolumeValue);
 		// VolumeControl.setVolume((float)VolumeValue);
 	}
 
@@ -479,27 +468,6 @@ public class GUIController implements Initializable {
 				String crude = Base64MP3.encodeToB64(archive.toString());
 				SongName.Song(archive.getName(), "Point of Know Return", "1977", crude.substring(1, 100), "Soft Rock", "asd");
 			}
-		}
-	}
-
-	@FXML
-	ImageView caratula;
-
-	@FXML
-	private void Caratula(String namesong) {
-
-		if (namesong.compareTo("Kansas - Dust in the Wind - Point of Know Return") == 0) {
-			Image ImageSong = new Image("/GUI/img/Point of Know Return.jpg", 245, 180, false, true);
-			caratula.setImage(ImageSong);
-		} else if (namesong.compareTo("Switchfoot - Awakening - Oh! Gravity") == 0) {
-			Image ImageSong = new Image("/GUI/img/Oh Gravity!.jpg", 245, 180, false, true);
-			caratula.setImage(ImageSong);
-		} else if (namesong.compareTo("The Lumineers - Ophelia - Cleopatra") == 0) {
-			Image ImageSong = new Image("/GUI/img/Cleopatra.jpg", 245, 180, false, true);
-			caratula.setImage(ImageSong);
-		} else if (namesong.compareTo("The Paper Kites - Bloom - Woodland - EP") == 0) {
-			Image ImageSong = new Image("/GUI/img/Woodland - EP.jpeg", 245, 180, false, true);
-			caratula.setImage(ImageSong);
 		}
 	}
 }

@@ -62,7 +62,7 @@ public class SongName {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("C:\\file.xml"));
+			StreamResult result = new StreamResult(new File("Song.xml"));
 
 			// Output to console for testing
 			// StreamResult result = new StreamResult(System.out);
@@ -82,7 +82,7 @@ public class SongName {
 			// if(!archivo.exists()){
 			// archivo.createNewFile();
 			// }
-			String contenido = readFile("C:\\file.xml", Charset.defaultCharset());
+			String contenido = readFile("Song.xml", Charset.defaultCharset());
 			OutputStream output = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(output, true);
 			writer.println(contenido);

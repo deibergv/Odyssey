@@ -17,7 +17,7 @@
 
 <HBox fx:id="parent" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="693.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
    <children>
-      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
+      <Pane fx:id="Sidebar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="300.0" styleClass="player" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets right="3.0" top="5.0" />
          </HBox.margin>
@@ -26,9 +26,9 @@
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="FILE_AUDIO_ALT" layoutX="14.0" layoutY="20.0" onMouseClicked="#SearchDirectory" size="1.5em" styleClass="menuBar-btn" />
                </children></Pane>
-            <Line endX="100.0" layoutX="153.0" layoutY="339.0" startX="-100.0" stroke="#e89511" strokeWidth="2.0" />
-            <ListView fx:id="listView" layoutX="14.0" layoutY="35.0" prefHeight="288.0" prefWidth="273.0" />
-            <ImageView fx:id="caratula" fitHeight="176.0" fitWidth="245.0" layoutX="28.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+            <Line endX="100.0" layoutX="153.0" layoutY="475.0" startX="-100.0" stroke="#e89511" strokeWidth="2.0" />
+            <ListView fx:id="listView" layoutX="14.0" layoutY="96.0" prefHeight="365.0" prefWidth="273.0" />
+            <ImageView fitHeight="176.0" fitWidth="245.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/Odyssey.gif" />
                </image></ImageView>
